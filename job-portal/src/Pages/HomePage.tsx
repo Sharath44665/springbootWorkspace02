@@ -1,10 +1,18 @@
-import Header from "../Header/Header";
+
+
+import Companies from "../LandingPage/Companies";
+import Dreamjob from "../LandingPage/DreamJob";
 
 const HomePage = () => {
     return (
         <>
-        <Header/>
+            <Dreamjob/>
+            <Companies />
+            
         </>
+
+
+
     )
 }
 
