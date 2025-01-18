@@ -8,9 +8,9 @@ const Companies = () => {
         <div className="text-center fs-1">
             Trusted by <span className="text-primary">1000+</span> Companies
         </div>
-        <Marquee>
+        <Marquee pauseOnHover={true} >
             {
-                companies.map((company, idx) => <div key={idx} style={{backgroundColor:'black'}}>
+                companies.map((company, idx) => <div key={idx} style={{backgroundColor:'black',cursor:'pointer'}}>
                     <img style={{height:'100px'}} className="mx-3" src={`/Companies/${company}.png`} alt={company} />
                 </div>)
             }

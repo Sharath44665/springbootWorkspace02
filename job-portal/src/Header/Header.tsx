@@ -6,7 +6,7 @@ import { NavLink } from "react-router";
 const Header = () => {
     return (
         <>
-            <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark " data-bs-theme="dark">
+            <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark sticky-sm-top" data-bs-theme="dark">
                 <div className="container-fluid">
                 <i className="bi bi-person-arms-up mx-2" style={{"color":"white"}}></i>
                     <NavLink className="navbar-brand" to="/">iJobs</NavLink>
@@ -14,6 +14,7 @@ const Header = () => {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
                                 <NavLink className="nav-link" aria-current="page" to="/findjob">Find Jobs</NavLink>
