@@ -1,7 +1,10 @@
+import SearchBar from "../FindJobs/SearchBar";
+
 const FindJob = () => {
     return(
         <>
-        <h2>Find jobs</h2>
+
+        <SearchBar/>
         </>
     )
 }

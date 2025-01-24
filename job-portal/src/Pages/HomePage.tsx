@@ -1,4 +1,3 @@
-import Footer from "../Footer/Footer";
 import Companies from "../LandingPage/Companies";
 import Dreamjob from "../LandingPage/DreamJob";
 import JobCategory from "../LandingPage/JobCategory";
@@ -15,7 +14,7 @@ const HomePage = () => {
             <Working />
             <Testimonials />
             <Subscribe />
-            <Footer />
+            
         </>
     )
 }
