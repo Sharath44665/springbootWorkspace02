@@ -24,17 +24,17 @@ const jobCategory = [
     {
         "name": "Content Writing",
         "desc": "Write and edit content for various platforms",
-        "jobs": "1.5k"
+        "jobs": "1.5"
     },
     {
         "name": "Data Entry",
         "desc": "Input data into systems accurately and efficiently",
-        "jobs": "1k"
+        "jobs": "1"
     },
     {
         "name": "Customer Support",
         "desc": "Assist customers with inquiries and issues",
-        "jobs": "1.2k"
+        "jobs": "1.2"
     },
     {
         "name": "Sales",
