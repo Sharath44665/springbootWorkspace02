@@ -21,14 +21,14 @@ function Testimonials() {
                     {
                         testimonials.map((item, idx) => {
                             return (
-                                <Grid>
+                                <Grid key={idx}>
                                     <Card sx={{ maxWidth: 350, border: '1px solid lightgrey' }} key={idx}>
-                                        <CardHeader avatar={<Avatar sx={{ backgroundColor: 'blue', height: '50px', width: '50px' }}>S</Avatar>}
+                                        <CardHeader key={idx} avatar={<Avatar sx={{ backgroundColor: 'blue', height: '50px', width: '50px' }}>S</Avatar>}
                                             title={<Typography sx={{ fontSize: '22px' }}>{item.name}</Typography>}
                                             subheader={<Rating name="half-rating" defaultValue={item.rating} precision={0.5} />}
                                         />
-                                        <CardContent>
-                                            <Typography variant="body2" sx={{ fontSize: '17px' }}>{item.testimonial}</Typography>
+                                        <CardContent key={idx}>
+                                            <Typography key={idx} variant="body2" sx={{ fontSize: '17px' }}>{item.testimonial}</Typography>
                                         </CardContent>
                                     </Card>
                                 </Grid>
