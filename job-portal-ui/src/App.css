@@ -1,0 +1,8 @@
+@import "tailwindcss";
+.navlink, .active {
+    border-top: solid;
+    color: white;
+}
+
+
+
