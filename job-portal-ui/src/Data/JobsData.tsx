@@ -1,8 +1,8 @@
-// import { IconBriefcase, IconMapPin, IconRecharging, IconSearch } from "@tabler/icons-react";
-const IconSearch = <i className="bi bi-search"></i>
-const IconMapPin = <i className="bi bi-pin-angle"></i>
-const IconBriefcase = <i className="bi bi-briefcase"></i>
-const IconRecharging = <i className="bi bi-lightning-charge-fill"></i>
+import { IconBriefcase, IconMapPin, IconRecharging, IconSearch } from "@tabler/icons-react";
+// const IconSearch = <i className="bi bi-search"></i>
+// const IconMapPin = <i className="bi bi-pin-angle"></i>
+// const IconBriefcase = <i className="bi bi-briefcase"></i>
+// const IconRecharging = <i className="bi bi-lightning-charge-fill"></i>
 const dropdownData = [
     { title: "Job Title", icon: IconSearch, options: ['Designer', 'Developer', 'Product Manager', 'Marketing Specialist', 'Data Analyst', 'Sales Executive', 'Content Writer', 'Customer Support'] },
     { title: "Location", icon: IconMapPin, options: ['Delhi', 'New York', 'San Francisco', 'London', 'Berlin', 'Tokyo', 'Sydney', 'Toronto'] },

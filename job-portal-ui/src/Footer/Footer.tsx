@@ -20,7 +20,7 @@ const Footer = () => {
                     </div>
 
                 </div>
-
+                
                 {
                     footerLinks.map((fLinks, idx) => {
                         return (
