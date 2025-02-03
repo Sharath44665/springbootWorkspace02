@@ -2,22 +2,30 @@
 import { useState } from "react";
 import { dropdownData } from "../Data/JobsData";
 import MultiInput from "./MutliInput";
-import { RangeSlider } from "@mantine/core";
+import { Divider, RangeSlider } from "@mantine/core";
+import Jobs from "./Jobs";
+
 
 const SearchBar = () => {
     const [value, setValue] = useState([1, 10])
     return (
         <>
+        <Divider my="xs" label="Filter Jobs:" labelPosition="left" />
             <div className="flex justify-evenly gap-2 pt-4 px-2 mx-auto ">
                 {
                     dropdownData.map((dropdownItem, idx) => {
                         return (
+                            <>
                             <div key={idx} className="w-1/5" >
                                 <MultiInput {...dropdownItem} />
                             </div>
+                            <Divider orientation="vertical" />
+                            </>
+                            
                         )
                     })
                 }
+
                 <div className="w-1/5 ">
                     <div className="flex justify-between">
                         <div>Salary</div>
@@ -30,6 +38,8 @@ const SearchBar = () => {
 
 
             </div>
+            <Divider my="md" />
+            <Jobs />
 
 
         </>
