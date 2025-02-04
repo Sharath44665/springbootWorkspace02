@@ -1,3 +1,10 @@
+# Tailwind tips:
+
+in `classname = '[&>]span'`
+- [&_] : to target parent or child
+- [&>] : only target child(s)
+- [&>*]: target all childs
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
