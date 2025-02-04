@@ -17,7 +17,7 @@ const SearchBar = () => {
                         return (
                             <>
                             <div key={idx} className="w-1/5" >
-                                <MultiInput {...dropdownItem} />
+                                <MultiInput key={idx}{...dropdownItem} />
                             </div>
                             <Divider orientation="vertical" />
                             </>

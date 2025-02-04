@@ -1,4 +1,3 @@
-import { Container } from "@mantine/core";
 import { jobList } from "../Data/JobsData";
 import JobCard from "./JobCard";
 import Sort from "./Sort";
@@ -11,18 +10,15 @@ const Jobs = () => {
                     <div className="capitalize text-2xl font-semibold">recommended jobs</div>
                     <div className="capitalize"><Sort /></div>
                 </div>
-                <Container  size="max-width" >
-                    <div className="flex flex-wrap gap-2 @container">
+                
+                    <div className="flex flex-wrap justify-evenly pt-3 gap-4">
                         {
                             jobList.map((job, idx) => <JobCard key={idx} {...job} />)
                         }
                     </div>
-                </Container>
-
-
+                
 
             </div>
-
 
         </>
     )

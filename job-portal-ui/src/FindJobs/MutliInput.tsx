@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Checkbox, Combobox, Group, Input, Pill, PillsInput, useCombobox } from '@mantine/core';
+import { Checkbox, Combobox, Group, Pill, PillsInput, useCombobox } from '@mantine/core';
 // import { IconSearch, IconMapPin, IconBriefcase, IconRecharging } from '@tabler/icons-react';
 
 
