@@ -5,7 +5,7 @@ const JobCard = (props:any) => {
     return (
 
         <>
-            <div className="w-72 border p-2 border-blue-200 rounded-lg hover:border-blue-500 hover:shadow-xl">
+            <div className="w-89 border p-2 border-blue-200 rounded-lg hover:border-blue-500 hover:shadow-xl">
                 <div className="flex bg-[#cbedff] justify-between">
                     <div className="flex gap-2 items-center capitalize ">
                         <div className="p-1">
