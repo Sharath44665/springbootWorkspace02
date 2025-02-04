@@ -2,7 +2,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import { Routes, Route } from "react-router";
 import '@mantine/core/styles.css';
-import { createTheme, MantineProvider, Slider } from '@mantine/core';
+import { createTheme, MantineProvider } from '@mantine/core';
 
 
 import './App.css'
@@ -10,6 +10,8 @@ import HomePage from './Pages/Homepage';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import FindJob from './Pages/FindJob';
+import FindTalent from './Pages/FindTalent';
+import TalentProfile from './Pages/TalentProfile';
 
 const theme = createTheme({
   colors: {
@@ -40,8 +42,9 @@ function App() {
         <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/findjob" element={<FindJob />} />
-        {/* <Route path="/findtalent" element={<FindTalent />} />
-        <Route path="/uploadjob" element={<UploadTalent />} />
+        <Route path="/findtalent" element={<FindTalent />} />
+        <Route path="/talent-profile" element={<TalentProfile />} />
+        {/* <Route path="/uploadjob" element={<UploadTalent />} />
         <Route path="/aboutus" element={<AboutUs />} /> */}
       </Routes>
         <Footer/>
