@@ -1,6 +1,6 @@
 # Tailwind tips:
 
-in `classname = '[&>]span'`
+in `classname = '[&>span]:font-semibold'`
 - [&_] : to target parent or child
 - [&>] : only target child(s)
 - [&>*]: target all childs
