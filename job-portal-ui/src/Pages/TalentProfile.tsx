@@ -9,14 +9,14 @@ const TalentProfile = () => {
         <>
             <div className="px-5 pt-5">
 
-            <Link to='/findtalent'>
-                <Button leftSection={<IconArrowNarrowLeft/>} variant="light" >back to find talent</Button>
-            </Link>
+                <Link to='/findtalent'>
+                    <Button leftSection={<IconArrowNarrowLeft/>} variant="light" >back to find talent</Button>
+                </Link>
             </div>
-    
+
             <div className="flex px-5 pt-5">
                 <Profile {...profile} />
-                
+
             </div>
         </>
     )
