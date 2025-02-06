@@ -3,7 +3,6 @@ import { fields } from "../Data/PostJob";
 import SelectInput from "./SelectInput";
 import '@mantine/tiptap/styles.css';
 import MyRichTextEditor from "./MyRichTextEditor";
-import { IconArrowLeft } from "@tabler/icons-react";
 
 const PostJob = () => {
     const select = fields;
