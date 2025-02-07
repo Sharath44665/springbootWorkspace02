@@ -15,6 +15,7 @@ import TalentProfile from './Pages/TalentProfile';
 import PostJobPage from './Pages/PostJobPage';
 import JobDescPage from './Pages/JobDescPage';
 import ApplyJob from './Pages/ApplyJob';
+import CompanyPage from './Pages/CompanyPage';
 
 const theme = createTheme({
   colors: {
@@ -50,6 +51,7 @@ function App() {
         <Route path="/findtalent" element={<FindTalent />} />
         <Route path="/jobs" element={<JobDescPage />} />
         <Route path="/apply-job" element={<ApplyJob />} />
+        <Route path="/company" element={<CompanyPage />} />
         <Route path="/talent-profile" element={<TalentProfile />} />
         <Route path="/pjob" element={<PostJobPage />} />
         {/* <Route path="/uploadjob" element={<UploadTalent />} />

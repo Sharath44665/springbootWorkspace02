@@ -78,7 +78,7 @@ const JobDesc = () => {
                             </div>
                         </div>
                         <div className="flex flex-col gap-2 items-center">
-                            <Link to=''>
+                            <Link to='/company'>
                                 <Button variant="filled " size="sm" >Company Page</Button>
                             </Link>
 
