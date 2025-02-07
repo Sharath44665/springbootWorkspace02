@@ -15,7 +15,7 @@ const CompanyPage = () => {
 
             <div className="flex px-5 pt-5">
                 <Company />
-                <SimilarCompanies />
+                <SimilarCompanies /> 
             </div>
 
         </>
