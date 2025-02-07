@@ -2,6 +2,7 @@ import { Button } from "@mantine/core";
 import { IconArrowNarrowLeft } from "@tabler/icons-react";
 import { useNavigate } from "react-router";
 import Company from "../CompanyProfile/Company";
+import SimilarCompanies from "../CompanyProfile/SimilarCompanies";
 
 const CompanyPage = () => {
     const navigate = useNavigate();
@@ -14,7 +15,9 @@ const CompanyPage = () => {
 
             <div className="flex px-5 pt-5">
                 <Company />
+                <SimilarCompanies />
             </div>
+
         </>
     )
 }
