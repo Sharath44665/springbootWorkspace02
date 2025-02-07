@@ -1,8 +1,16 @@
-import { IconHeart, IconMapPin } from "@tabler/icons-react";
-import { Avatar, Button, Divider, Text } from '@mantine/core';
+import { IconCalendarMonth, IconHeart, IconMapPin } from "@tabler/icons-react";
+import { Avatar, Button, Divider, Modal, Text, Tooltip } from '@mantine/core';
 import { Link } from "react-router";
+import { useDisclosure } from "@mantine/hooks";
+import '@mantine/dates/styles.css';
+import { DateInput, TimeInput } from '@mantine/dates';
+import { useRef, useState } from "react";
+
 
 const TalentCard = (props: any) => {
+    const [opened, { open, close }] = useDisclosure(false);
+    const [value, setValue] = useState<Date | null>(null);
+    const ref = useRef<HTMLInputElement>(null)
     return (
 
         <>
@@ -26,7 +34,7 @@ const TalentCard = (props: any) => {
                         </div>)
                     }
 
-                    
+
                 </div>
                 <Text className='text-sm text-justify' lineClamp={3}>
                     {props.about}
@@ -42,10 +50,23 @@ const TalentCard = (props: any) => {
                         <Button variant="outline" fullWidth>Profile</Button>
                     </Link>
                     <div>
+                        {props.posted ? <Tooltip label="Schedule Interview"><Button onClick={open} className="[&_span]:!text-xs" rightSection={<IconCalendarMonth size={20} />} variant="light" fullWidth>Schedule Interview</Button></Tooltip> : <Button variant="light" fullWidth>Message</Button>}
 
-                        <Button variant="light" fullWidth>Message</Button>
                     </div>
                 </div>
+                <Modal opened={opened} onClose={close} title="Schedule Interview" centered>
+                    <div className="flex flex-col gap-4">
+                        <DateInput
+                            value={value}
+                            minDate={new Date()} 
+                            onChange={setValue}
+                            label="Date"
+                            placeholder="Enter Date"
+                        />
+                         <TimeInput label="Time" ref={ref} onClick={() => ref.current?.showPicker()}/>
+                         <Button variant="light" fullWidth>Schedule</Button>
+                    </div>
+                </Modal>
             </div>
 
 

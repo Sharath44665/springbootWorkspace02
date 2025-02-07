@@ -5,12 +5,12 @@ import { card, desc, skills } from "../Data/JobDescData";
 //@ts-ignore
 import DOMPurify from 'dompurify';
 
-const JobDesc = () => {
+const JobDesc = (props:any) => {
     const data = DOMPurify.sanitize(desc);;
     return (
         <>
             <div className="w-2/3">
-                <div className="flex bg-[#cbedff] justify-between">
+                <div className="flex bg-[#cbedff] justify-between p-2 rounded-lg">
                     <div className="flex gap-2 items-center capitalize ">
                         <div className="p-3">
 
@@ -26,9 +26,10 @@ const JobDesc = () => {
                     </div>
                     <div className="flex flex-col gap-2 items-center">
                         <Link to='/apply-job'>
-                            <Button variant="filled" size="sm" >Apply</Button>
+                            <Button variant="filled" size="sm" >{props.edit?'Edit': 'Apply'}</Button>
                         </Link>
-                        <IconBookmark className="cursor-pointer" />
+                        {props.edit?<Button variant="outline" color="red">Delete</Button>:<IconBookmark className="cursor-pointer" />}
+                        
                     </div>
                 </div>
 
@@ -49,7 +50,7 @@ const JobDesc = () => {
                     <div className="text-xl font-semibold mb-3">Requirede Skills</div>
                     <div className="flex flex-wrap gap-2 mb-3">
                         {
-                            skills.map((jobSkill: any, idx: any) => <ActionIcon key={idx} className="!h-fit !w-fit !text-sm" p='xs' variant="filled" radius="xl" aria-label="Settings">
+                            skills.map((jobSkill: any, idx: any) => <ActionIcon key={idx} className="!h-fit !w-fit [&_span]:!text-sm" p='xs' size='sm' variant="filled" radius="xl" aria-label="Settings">
                                 {jobSkill}
                             </ActionIcon>)
                         }

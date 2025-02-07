@@ -12,8 +12,6 @@ const CompanyEmployees = () => {
 
                     )
                 }
-
-
             </div>
         </>
     )

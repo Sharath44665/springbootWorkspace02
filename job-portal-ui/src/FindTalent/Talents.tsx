@@ -11,7 +11,7 @@ const Talents = () => {
                     <div className="capitalize"><Sort /></div>
                 </div>
 
-                <div className="flex flex-wrap justify-evenly pt-4 gap-4">
+                <div className="flex flex-wrap justify-evenly pt-4 gap-2">
                     {
                         talents.map((talent, idx) => {
                             return (<>
