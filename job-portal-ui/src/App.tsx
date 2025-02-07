@@ -41,6 +41,8 @@ function App() {
   return (
     <>
       <MantineProvider theme={theme}>
+        <div className='relative'>
+
         <Header />
         <Routes>
         <Route path="/" element={<HomePage />} />
@@ -54,6 +56,7 @@ function App() {
         <Route path="/aboutus" element={<AboutUs />} /> */}
       </Routes>
         <Footer/>
+        </div>
 
       </MantineProvider>
 

@@ -1,4 +1,4 @@
-import { Button, FileInput, NumberInput, Textarea, TextInput, Notification} from "@mantine/core";
+import { Button, FileInput, NumberInput, Textarea, TextInput, Notification, LoadingOverlay } from "@mantine/core";
 import { IconCheck, IconFileCv } from "@tabler/icons-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
@@ -21,7 +21,7 @@ const ApplyJobCompany = () => {
         setInterval(() => {
             x -= 1;
             setSec(x)
-            if (x===0){
+            if (x === 0) {
                 navigate('/findjob')
             }
         }, 1000);
@@ -29,6 +29,12 @@ const ApplyJobCompany = () => {
     return (
         <>
             <div className="px-5 pt-5">
+                <LoadingOverlay className="!fixed"
+                    visible={submit}
+                    zIndex={1000}
+                    overlayProps={{ radius: 'sm', blur: 2 }}
+                    loaderProps={{ color: 'blue', type: 'bars' }}
+                />
 
                 <div className='w-2/3 mx-auto'>
 
@@ -53,7 +59,7 @@ const ApplyJobCompany = () => {
                         Submint your application
                     </div>
                     <div className="flex flex-col gap-4">
-                        <div className="flex gap-8 [&>*]:w-1/2 ">
+                        <div className="flex gap-8 [&>*]:w-1/2"> {/* testing: pt-[500px]*/}
                             <TextInput
                                 label="Full Name"
                                 placeholder="John Doe"
@@ -139,7 +145,7 @@ const ApplyJobCompany = () => {
                 </div>
             </div>
 
-            <Notification className={`!fixed top-0 left-[35%] transition duration-300 ease-in-out ${submit ?"translate-y-0":"-translate-y-20"} `} icon={ <IconCheck size={20} />} color="teal" title="Application Submitted!" mt="md" withCloseButton={false} withBorder>
+            <Notification className={`!fixed top-0 z-[1001] left-[35%] transition duration-300 ease-in-out ${submit ? "translate-y-0" : "-translate-y-20"} `} icon={<IconCheck size={20} />} color="teal" title="Application Submitted!" mt="md" withCloseButton={false} withBorder>
                 you'll be redirected to Find jobs in {sec} seconds
             </Notification>
         </>
