@@ -2,7 +2,6 @@ import { Button, Divider } from "@mantine/core";
 import { IconBriefcase, IconCurrentLocation } from "@tabler/icons-react";
 import ExpCard from "./ExpCard";
 import CertificationCard from "./CertificationCard";
-import RecommendTalent from "./RecommendTalent";
 
 const Profile = (props: any) => {
     return (
@@ -58,9 +57,7 @@ const Profile = (props: any) => {
 
 
             </div>
-            <div className="w-1/3">
-                <RecommendTalent/>
-            </div>
+            
         </>
     )
 }
