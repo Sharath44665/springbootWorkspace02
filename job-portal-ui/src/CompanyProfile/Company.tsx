@@ -2,6 +2,7 @@ import { Avatar, Divider, Tabs } from "@mantine/core";
 import { IconCurrentLocation } from "@tabler/icons-react";
 import AboutComp from "./AboutComp";
 import CompanyJobs from "./CompanyJobs";
+import CompanyEmployees from "./CompanyEmployees";
 
 const Company = () => {
     return (
@@ -25,6 +26,7 @@ const Company = () => {
 
                     <div className="flex text-gray-400 gap-1 items-center text-lg"><IconCurrentLocation /> bengaluru </div>
                 </div>
+                
                 <Divider my='xl' />
                 <div>
                     <Tabs className="[&_button]:!text-xl [&_button[data-active='true']]:!text-blue-600 " variant="outline" radius="md" defaultValue="about">
@@ -41,7 +43,7 @@ const Company = () => {
                             <CompanyJobs/>
                         </Tabs.Panel>
                         <Tabs.Panel value="employees">
-                            employees panel
+                            <CompanyEmployees />
                         </Tabs.Panel>
 
                     </Tabs>
