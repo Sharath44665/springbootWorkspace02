@@ -41,30 +41,50 @@ const TalentCard = (props: any) => {
                 </Text>
                 <Divider my="md" />
                 <div className="flex justify-between text-sm font-semibold items-center">
-                    <div>{props.expectedCtc}</div>
-                    <div className="flex text-gray-400 items-center"><IconMapPin className="h-10" />  {props.location}</div>
+                    {
+                        props.invited ? <div className="flex gap-1 text-sm items-center">
+                            <IconCalendarMonth /> Interview: 9 march 2025 on Time: 3:00 PM
+                        </div> : <><div>{props.expectedCtc}</div>
+                            <div className="flex text-gray-400 items-center"><IconMapPin className="h-10" />  {props.location}</div></>
+                    }
+
                 </div>
                 <Divider my="md" />
                 <div className="flex [&>*]:w-1/2 [&>*]:p-1">
-                    <Link to='/talent-profile'>
-                        <Button variant="outline" fullWidth>Profile</Button>
-                    </Link>
-                    <div>
-                        {props.posted ? <Tooltip label="Schedule Interview"><Button onClick={open} className="[&_span]:!text-xs" rightSection={<IconCalendarMonth size={20} />} variant="light" fullWidth>Schedule Interview</Button></Tooltip> : <Button variant="light" fullWidth>Message</Button>}
+                    {
+                        !props.invited ? <>
+                            <Link to='/talent-profile'>
+                                <Button variant="outline" fullWidth>Profile</Button>
+                            </Link>
+                            <div>
+                                {props.posted ? <Tooltip label="Schedule Interview"><Button onClick={open} className="[&_span]:!text-xs" rightSection={<IconCalendarMonth size={20} />} variant="light" fullWidth>Schedule Interview</Button></Tooltip> : <Button variant="light" fullWidth>Message</Button>}
 
-                    </div>
+                            </div>
+                        </> : <>
+
+                            <Link to=''>
+                                <Button variant="outline" fullWidth>Accept</Button>
+                            </Link>
+                            <div>
+                                <Button variant="light" fullWidth>Reject</Button>
+
+                            </div>
+
+                        </>
+                    }
+
                 </div>
                 <Modal opened={opened} onClose={close} title="Schedule Interview" centered>
                     <div className="flex flex-col gap-4">
                         <DateInput
                             value={value}
-                            minDate={new Date()} 
+                            minDate={new Date()}
                             onChange={setValue}
                             label="Date"
                             placeholder="Enter Date"
                         />
-                         <TimeInput label="Time" ref={ref} onClick={() => ref.current?.showPicker()}/>
-                         <Button variant="light" fullWidth>Schedule</Button>
+                        <TimeInput label="Time" ref={ref} onClick={() => ref.current?.showPicker()} />
+                        <Button variant="light" fullWidth>Schedule</Button>
                     </div>
                 </Modal>
             </div>

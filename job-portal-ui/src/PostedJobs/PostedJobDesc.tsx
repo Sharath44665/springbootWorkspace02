@@ -32,7 +32,15 @@ const PostedJobDesc = () => {
                             </div>
                         </Tabs.Panel>
                         <Tabs.Panel value="invited">
-                            invited
+                        <div className="flex flex-wrap justify-evenly pt-4 gap-4">
+                                {
+                                    talents.map((talent, idx) =>
+
+                                        idx < 6 && <TalentCard key={idx} {...talent} invited />
+
+                                    )
+                                }
+                            </div>
                         </Tabs.Panel>
 
                     </Tabs>
