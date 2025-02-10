@@ -7,7 +7,7 @@ const JobCard = (props:any) => {
 
         <>
             <Link to='/jobs' className="w-89 border p-2 border-blue-200 rounded-lg hover:border-blue-500 hover:shadow-xl">
-                <div className="flex bg-[#cbedff] justify-between">
+                <div className="flex bg-[#cbedff] text-black justify-between">
                     <div className="flex gap-2 items-center capitalize ">
                         <div className="p-1">
                             <img className="h-7" src={`/Icons/${props.company}.png`} alt="microsoft" />
@@ -19,7 +19,7 @@ const JobCard = (props:any) => {
                     </div>
                     <IconBookmark className="cursor-pointer" />
                 </div>
-                <div className="flex capitalize pt-1 text-xs gap-2 [&>div]:py-1 [&>div]:px-2 [&>div]:rounded-lg  [&>div]:bg-[#e1f8ff]">
+                <div className="flex capitalize pt-1 text-xs gap-2 [&>div]:py-1 [&>div]:px-2 [&>div]:rounded-lg [&>div]:text-black  [&>div]:bg-[#e1f8ff]">
                     <div>{props.experience}</div>
                     <div>{props.jobType}</div>
                     <div>{props.location}</div>

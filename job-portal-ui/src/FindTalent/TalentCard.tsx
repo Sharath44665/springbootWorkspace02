@@ -15,7 +15,7 @@ const TalentCard = (props: any) => {
 
         <>
             <div className="w-89 border p-2 border-blue-200 rounded-lg hover:border-blue-500 hover:shadow-xl">
-                <div className="flex bg-[#cbedff] justify-between">
+                <div className="flex bg-blue-300 text-black justify-between">
                     <div className="flex gap-2 items-center capitalize ">
                         <div className="p-1">
                             <Avatar size='lg' src={`/${props.image}.png`} alt="microsoft" />
@@ -27,7 +27,7 @@ const TalentCard = (props: any) => {
                     </div>
                     <IconHeart className="cursor-pointer" />
                 </div>
-                <div className="flex capitalize pt-1 text-xs gap-2 [&>div]:py-1 [&>div]:px-2 [&>div]:rounded-lg  [&>div]:bg-[#e1f8ff]">
+                <div className="flex capitalize pt-1 text-xs gap-2 [&>div]:py-1 [&>div]:px-2 [&>div]:rounded-lg [&>div]:text-black [&>div]:bg-[#e1f8ff]">
                     {
                         props.topSkills?.map((skill: any, index: any) => <div key={index}>
                             {skill}

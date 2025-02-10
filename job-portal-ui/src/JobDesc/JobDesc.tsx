@@ -10,7 +10,7 @@ const JobDesc = (props:any) => {
     return (
         <>
             <div className="w-2/3">
-                <div className="flex bg-[#cbedff] justify-between p-2 rounded-lg">
+                <div className="flex bg-[#cbedff] text-black justify-between p-2 rounded-lg">
                     <div className="flex gap-2 items-center capitalize ">
                         <div className="p-3">
 
@@ -64,7 +64,7 @@ const JobDesc = (props:any) => {
                 <Divider />
                 <div>
                     <div className="text-xl font-semibold mb-3">About Company:</div>
-                    <div className="flex bg-[#cbedff] justify-between items-center">
+                    <div className="flex bg-[#cbedff] text-black justify-between items-center">
                         <div className="flex gap-2 items-center capitalize ">
                             <div className="p-3">
 

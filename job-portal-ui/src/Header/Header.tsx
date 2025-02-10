@@ -2,6 +2,7 @@ import { Avatar, Indicator, Switch } from '@mantine/core';
 import { IconAsset, IconBell, IconSettings } from '@tabler/icons-react';
 import NavLinks from './NavLinks';
 import { Link } from 'react-router';
+import DarkMode from './DarkMode';
 const Header = () => {
     return (
         <>
@@ -12,7 +13,7 @@ const Header = () => {
                 </div>
                 <NavLinks />
                 <div className='flex gap-2 items-center'>
-                <Switch size="md" onLabel="Dark On" offLabel="Dark Off" />
+                    <DarkMode/>
                     <div className='bg-stone-700 p-1 rounded-full'>
                         <Indicator color="indigo" size={7} offset={6} processing>
                             <IconBell stroke={2} />
