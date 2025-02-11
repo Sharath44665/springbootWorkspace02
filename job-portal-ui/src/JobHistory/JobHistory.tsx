@@ -31,14 +31,14 @@ const JobHistory = () => {
                 <Tabs.Panel value="offered">
                     <div className="flex flex-wrap justify-evenly pt-3 gap-4">
                         {
-                            jobList.map((job, idx) => <Card key={idx} {...job} />)
+                            jobList.map((job, idx) => <Card key={idx} {...job} offered />)
                         }
                     </div>
                 </Tabs.Panel>
                 <Tabs.Panel value="interviewing">
                     <div className="flex flex-wrap justify-evenly pt-3 gap-4">
                         {
-                            jobList.map((job, idx) => <Card key={idx} {...job} />)
+                            jobList.map((job, idx) => <Card key={idx} {...job} interviewing />)
                         }
                     </div>
                 </Tabs.Panel>

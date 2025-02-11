@@ -1,8 +1,8 @@
 import { IconBookmark, IconBookmarkFilled, IconClockHour3 } from "@tabler/icons-react";
-import { Divider, Text } from '@mantine/core';
+import { Button, Divider, Text } from '@mantine/core';
 import { Link } from "react-router";
 
-const Card = (props:any) => {
+const Card = (props: any) => {
     return (
 
         <>
@@ -17,8 +17,8 @@ const Card = (props:any) => {
                             <div>{props.company} &middot; {props.applicants} applicants</div>
                         </div>
                     </div>
-                    {props.saved?<IconBookmarkFilled className="cursor-pointer" />:<IconBookmark className="cursor-pointer" />}
-                    
+                    {props.saved ? <IconBookmarkFilled className="cursor-pointer" /> : <IconBookmark className="cursor-pointer" />}
+
                 </div>
                 <div className="flex capitalize pt-1 text-xs gap-2 [&>div]:py-1 [&>div]:px-2 [&>div]:rounded-lg [&>div]:text-black  [&>div]:bg-[#e1f8ff]">
                     <div>{props.experience}</div>
@@ -31,9 +31,15 @@ const Card = (props:any) => {
                 <Divider my="md" />
                 <div className="flex justify-between text-sm">
                     <div> &#8377; {props.package}</div>
-                    <div className="flex text-gray-400"><IconClockHour3 className="text-sm" /> {props.applied? "Applied": ""} {props.postedDaysAgo} days ago</div>
+                    <div className="flex text-gray-400"><IconClockHour3 className="text-sm" /> {props.applied ? "Applied" : props.offered ? " Interviewed" : ""} {props.postedDaysAgo} days ago</div>
                 </div>
+                {
+                    props.offered &&<div className="flex gap-2">
 
+                        <Button variant="outline" fullWidth>Accept</Button>
+                        <Button variant="light" fullWidth>Reject</Button>
+                    </div>
+                }
             </Link>
 
 
