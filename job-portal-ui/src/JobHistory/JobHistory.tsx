@@ -24,7 +24,7 @@ const JobHistory = () => {
                 <Tabs.Panel value="saved">
                     <div className="flex flex-wrap justify-evenly pt-3 gap-4">
                         {
-                            jobList.map((job, idx) => <Card key={idx} {...job}  />)
+                            jobList.map((job, idx) => <Card key={idx} {...job} saved />)
                         }
                     </div>
                 </Tabs.Panel>

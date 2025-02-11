@@ -1,4 +1,4 @@
-import { IconBookmark, IconClockHour3 } from "@tabler/icons-react";
+import { IconBookmark, IconBookmarkFilled, IconClockHour3 } from "@tabler/icons-react";
 import { Divider, Text } from '@mantine/core';
 import { Link } from "react-router";
 
@@ -17,7 +17,8 @@ const Card = (props:any) => {
                             <div>{props.company} &middot; {props.applicants} applicants</div>
                         </div>
                     </div>
-                    <IconBookmark className="cursor-pointer" />
+                    {props.saved?<IconBookmarkFilled className="cursor-pointer" />:<IconBookmark className="cursor-pointer" />}
+                    
                 </div>
                 <div className="flex capitalize pt-1 text-xs gap-2 [&>div]:py-1 [&>div]:px-2 [&>div]:rounded-lg [&>div]:text-black  [&>div]:bg-[#e1f8ff]">
                     <div>{props.experience}</div>
