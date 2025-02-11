@@ -1,4 +1,4 @@
-import { IconBookmark, IconBookmarkFilled, IconClockHour3 } from "@tabler/icons-react";
+import { IconBookmark, IconBookmarkFilled, IconCalendarMonth, IconClockHour3 } from "@tabler/icons-react";
 import { Button, Divider, Text } from '@mantine/core';
 import { Link } from "react-router";
 
@@ -34,10 +34,15 @@ const Card = (props: any) => {
                     <div className="flex text-gray-400"><IconClockHour3 className="text-sm" /> {props.applied ? "Applied" : props.offered ? " Interviewed" : ""} {props.postedDaysAgo} days ago</div>
                 </div>
                 {
-                    props.offered &&<div className="flex gap-2">
+                    props.offered && <div className="flex gap-2">
 
                         <Button variant="outline" fullWidth>Accept</Button>
                         <Button variant="light" fullWidth>Reject</Button>
+                    </div>
+                }
+                {
+                    props.interviewing && <div className="flex gap-1 text-sm">
+                        <IconCalendarMonth /> Sun, 22 March &bull; <span className="font-semibold">3:00 PM</span>
                     </div>
                 }
             </Link>
