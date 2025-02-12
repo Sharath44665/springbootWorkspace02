@@ -7,6 +7,7 @@ import SelectInput from "./SelectInput";
 import fields from "../Data/Profile";
 import { profile } from "../Data/TalentData";
 import ExpInput from "./ExpInput";
+import CertificationInput from "./CertificationInput";
 
 const Profile = (props: any) => {
     const [edit, setEdit] = useState([false, false, false, false, false])
@@ -22,6 +23,7 @@ const Profile = (props: any) => {
     const [skills, setSkills] = useState<string[]>(['React', 'Spring Boot', 'Java', 'Python', 'Node.js', 'MongoDB', 'Express', 'Django', 'PostgreSQL']);
 
     const [addExp, setAddExp] = useState(false);
+    const [addCerti, setAddCerti] = useState(false);
 
     const select = fields;
     return (
@@ -138,18 +140,26 @@ const Profile = (props: any) => {
                 <div>
                     <div className="text-2xl font-semibold mb-3 flex justify-between ">
                         Certifications
-                        <ActionIcon size='lg' variant="subtle" onClick={() => handleEdit(4)} >
-                            {
-                                edit[4] ? <IconDeviceFloppy className="h-4/5 w-4/5" /> : <IconPencil className="h-4/5 w-4/5" />
-                            }
-                        </ActionIcon>
+                        <div>
+                            <ActionIcon size='lg' variant="subtle" onClick={() => setAddCerti(true)} >
+                                <IconPlus className="h-4/5 w-4/5" /> 
+                            </ActionIcon>
+                            <ActionIcon size='lg' variant="subtle" onClick={() => handleEdit(4)} >
+                                {
+                                    edit[4] ? <IconDeviceFloppy className="h-4/5 w-4/5" /> : <IconPencil className="h-4/5 w-4/5" />
+                                }
+                            </ActionIcon>
+                        </div>
                     </div>
                     <div className="flex flex-col gap-4">
 
                         {
-                            props.certifications.map(
-                                (certify: any, id: any) => <CertificationCard key={id} {...certify} />
+                            profile.certifications.map(
+                                (certify: any, id: any) => <CertificationCard key={id} {...certify} edit={edit[4]} />
                             )
+                        }
+                        {
+                           addCerti && <CertificationInput setEdit={setAddCerti} /> 
                         }
                     </div>
 
