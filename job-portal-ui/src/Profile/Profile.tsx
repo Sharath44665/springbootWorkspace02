@@ -1,10 +1,12 @@
-import { ActionIcon, Button, Divider, TagsInput, Textarea } from "@mantine/core";
-import { IconBriefcase, IconCurrentLocation, IconDeviceFloppy, IconPencil } from "@tabler/icons-react";
+import { ActionIcon, Divider, TagsInput, Textarea } from "@mantine/core";
+import { IconBriefcase, IconCurrentLocation, IconDeviceFloppy, IconPencil, IconPlus } from "@tabler/icons-react";
 import CertificationCard from "./CertificationCard";
 import ExpCard from "./ExpCard";
 import { useState } from "react";
 import SelectInput from "./SelectInput";
 import fields from "../Data/Profile";
+import { profile } from "../Data/TalentData";
+import ExpInput from "./ExpInput";
 
 const Profile = (props: any) => {
     const [edit, setEdit] = useState([false, false, false, false, false])
@@ -18,6 +20,8 @@ const Profile = (props: any) => {
     const [about, setAbout] = useState('As a Software Engineer at Google, I specialize in building scalable and high-performance applications. My expertise lies in integrating front-end and back-end technologies to deliver seamless user experiences. With a strong foundation in React and SpringBoot, and a focus on MongoDB for database solutions, I am passionate about leveraging the latest technologies to solve complex problems and drive innovation. My goal is to create impactful software that enhances productivity and meets user needs effectively.');
 
     const [skills, setSkills] = useState<string[]>(['React', 'Spring Boot', 'Java', 'Python', 'Node.js', 'MongoDB', 'Express', 'Django', 'PostgreSQL']);
+
+    const [addExp, setAddExp] = useState(false);
 
     const select = fields;
     return (
@@ -110,13 +114,23 @@ const Profile = (props: any) => {
                 <div>
                     <div className="text-2xl font-semibold mb-3 flex justify-between">
                         Experience
-                        <ActionIcon size='lg' variant="subtle" onClick={() => handleEdit(3)} >
-                            {
-                                edit[3] ? <IconDeviceFloppy className="h-4/5 w-4/5" /> : <IconPencil className="h-4/5 w-4/5" />
-                            }
-                        </ActionIcon>
+                        <div>
+                            <ActionIcon size='lg' variant="subtle" onClick={() => setAddExp(true)} >
+                                <IconPlus className="h-4/5 w-4/5" /> 
+                            </ActionIcon>
+                            <ActionIcon size='lg' variant="subtle" onClick={() => handleEdit(3)} >
+                                {
+                                    edit[3] ? <IconDeviceFloppy className="h-4/5 w-4/5" /> : <IconPencil className="h-4/5 w-4/5" />
+                                }
+                            </ActionIcon>
+                        </div>
+
                     </div>
-                    {props.experience.map((expItem: any, id: any) => <ExpCard key={id} {...expItem} />)}
+                    {
+                    profile.experience.map((expItem: any, id: any) => <ExpCard key={id} {...expItem} edit={edit[3]} />)
+                    }
+                    {addExp && <ExpInput setEdit={setAddExp} add /> }
+                    
 
                 </div>
 
