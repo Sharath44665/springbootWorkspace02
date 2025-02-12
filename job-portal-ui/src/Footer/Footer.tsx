@@ -1,8 +1,10 @@
 import { IconAsset, IconBrandLinkedin, IconBrandMeta, IconBrandX } from "@tabler/icons-react";
 import { footerLinks } from "../Data/Data";
+import { useLocation } from "react-router";
 
 const Footer = () => {
-    return (
+    const location = useLocation()
+    return location.pathname !='/signup' && location.pathname !='/login' ?(
         <>
             <div className="mt-4 pb-2 justify-around flex">
                 <div className="w-1/4 p-2 gap-3">
@@ -38,7 +40,7 @@ const Footer = () => {
 
             </div>
         </>
-    )
+    ):(<></>)
 }
 
 

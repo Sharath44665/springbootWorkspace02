@@ -1,10 +1,11 @@
-import { Avatar, Indicator, Switch } from '@mantine/core';
+import { Avatar, Indicator } from '@mantine/core';
 import { IconAsset, IconBell, IconSettings } from '@tabler/icons-react';
 import NavLinks from './NavLinks';
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import DarkMode from './DarkMode';
 const Header = () => {
-    return (
+    const location = useLocation()
+    return location.pathname !='/signup' && location.pathname !='/login' ? (
         <>
             <div className="w-full text-white bg-stone-900 h-20 flex px-6  justify-between items-center">
                 <div className='flex gap-2 items-center text-blue-500'>
@@ -33,7 +34,7 @@ const Header = () => {
             </div>
 
         </>
-    )
+    ):(<></>)
 }
 
 export default Header;
