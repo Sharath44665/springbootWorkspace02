@@ -24,3 +24,9 @@ success:
 
 ![success login](./img/loginSuccess.png)
 
+---
+
+register user
+- front end code check
+
+![register user](./img/axiosFrontEnd.png)
