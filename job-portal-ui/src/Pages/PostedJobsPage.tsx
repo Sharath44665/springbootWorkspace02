@@ -1,5 +1,5 @@
-import PostedJobDesc from "../PostedJobs/PostedJobDesc";
-import PostedJobs from "../PostedJobs/PostedJobs";
+import PostedJobDesc from "../Components/PostedJobs/PostedJobDesc";
+import PostedJobs from "../Components/PostedJobs/PostedJobs";
 
 
 const PostedJobsPage = () => {

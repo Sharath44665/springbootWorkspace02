@@ -1,7 +1,7 @@
 import { IconAsset } from "@tabler/icons-react";
 import { Link, useLocation } from "react-router";
-import Signup from "../SignupLogin/Signup";
-import Login from "../SignupLogin/Login";
+import Signup from "../Components/SignupLogin/Signup";
+import Login from "../Components/SignupLogin/Login";
 
 const SignupPage = () => {
     const location = useLocation();

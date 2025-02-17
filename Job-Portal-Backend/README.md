@@ -18,6 +18,8 @@ invalid:
 
 ![invalid login](./img/loginInvalidCredentials.png)
 
+> add invalid user in postman/thunderclient, to see invalid email id error
+
 success:
 
 ![success login](./img/loginSuccess.png)

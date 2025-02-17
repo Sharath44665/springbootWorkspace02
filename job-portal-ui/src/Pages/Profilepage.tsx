@@ -1,5 +1,5 @@
 import { profile } from "../Data/TalentData";
-import Profile from "../Profile/Profile";
+import Profile from "../Components/Profile/Profile";
 
 const ProfilePage = () => {
     return (

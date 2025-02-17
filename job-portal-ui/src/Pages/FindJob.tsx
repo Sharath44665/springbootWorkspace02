@@ -1,4 +1,4 @@
-import SearchBar from "../FindJobs/SearchBar"
+import SearchBar from "../Components/FindJobs/SearchBar"
 
 const FindJob = () => {
     return (

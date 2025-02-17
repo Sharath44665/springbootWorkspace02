@@ -1,8 +1,8 @@
 import { Button } from "@mantine/core";
 import { IconArrowNarrowLeft } from "@tabler/icons-react";
 import { useNavigate } from "react-router";
-import Company from "../CompanyProfile/Company";
-import SimilarCompanies from "../CompanyProfile/SimilarCompanies";
+import Company from "../Components/CompanyProfile/Company";
+import SimilarCompanies from "../Components/CompanyProfile/SimilarCompanies";
 
 const CompanyPage = () => {
     const navigate = useNavigate();

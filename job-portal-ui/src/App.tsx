@@ -6,9 +6,8 @@ import { createTheme, MantineProvider } from '@mantine/core';
 
 
 import './App.css'
-import HomePage from './Pages/Homepage';
-import Header from './Header/Header';
-import Footer from './Footer/Footer';
+import HomePage from './Pages/Homepage'; 
+import Footer from './Components/Footer/Footer';
 import FindJob from './Pages/FindJob';
 import FindTalent from './Pages/FindTalent';
 import TalentProfile from './Pages/TalentProfile';
@@ -21,6 +20,7 @@ import JobHistoryPage from './Pages/JobHistoryPage';
 import SignupPage from './Pages/SignupPage';
 import ProfilePage from './Pages/Profilepage';
 import ErrorPage from './Pages/ErrorPage';
+import Header from './Components/Header/Header';
 
 const theme = createTheme({
   colors: {
