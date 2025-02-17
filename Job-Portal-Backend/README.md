@@ -9,3 +9,16 @@ If user exists then show USER_FOUND error message:
 update error message:
 
 ![user not found error msg update](./img/userNotFoundUpdateErrMsg.png)
+
+---
+
+login route
+
+invalid:
+
+![invalid login](./img/loginInvalidCredentials.png)
+
+success:
+
+![success login](./img/loginSuccess.png)
+

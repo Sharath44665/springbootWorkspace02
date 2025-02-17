@@ -1,5 +1,6 @@
 package com.jobportal.service;
 
+import com.jobportal.dto.LoginDTO;
 import com.jobportal.dto.UserDTO;
 import com.jobportal.entity.User;
 import com.jobportal.exceptions.JobPortalException;
@@ -29,5 +30,13 @@ public class UserServiceImpl implements UserService {
         User user = userDTO.toEntity();
         user = userRepository.save(user);
         return  user.toDTO();
+    }
+
+    @Override
+    public UserDTO loginUser(LoginDTO loginDTO) throws JobPortalException {
+        User user = userRepository.findByEmail(loginDTO.getEmail()).orElseThrow(()-> new JobPortalException("USER_NOT_FOUND"));
+        if (!passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) throw new JobPortalException("INVALID_CREDENTIALS");
+        return user.toDTO();
+
     }
 }

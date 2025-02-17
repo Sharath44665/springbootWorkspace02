@@ -1,5 +1,6 @@
 package com.jobportal.api;
 
+import com.jobportal.dto.LoginDTO;
 import com.jobportal.dto.UserDTO;
 import com.jobportal.exceptions.JobPortalException;
 import com.jobportal.service.UserService;
@@ -24,5 +25,10 @@ public class UserAPI {
         return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<UserDTO> loginUser(@RequestBody @Valid LoginDTO loginDTO) throws JobPortalException {
+
+        return new ResponseEntity<>(userService.loginUser(loginDTO), HttpStatus.OK);
+    }
 
 }
