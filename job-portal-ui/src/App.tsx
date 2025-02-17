@@ -2,9 +2,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import { Routes, Route } from "react-router";
 import '@mantine/core/styles.css';
-import { createTheme, MantineProvider } from '@mantine/core';
-
-
+import { createTheme, MantineProvider } from '@mantine/core'; 
 import './App.css'
 import HomePage from './Pages/Homepage'; 
 import Footer from './Components/Footer/Footer';
@@ -21,6 +19,8 @@ import SignupPage from './Pages/SignupPage';
 import ProfilePage from './Pages/Profilepage';
 import ErrorPage from './Pages/ErrorPage';
 import Header from './Components/Header/Header';
+import '@mantine/notifications/styles.css';
+import { Notifications } from '@mantine/notifications';
 
 const theme = createTheme({
   colors: {
@@ -47,6 +47,7 @@ function App() {
   return (
     <>
       <MantineProvider theme={theme}>
+      <Notifications position="top-center" zIndex={1000} />
         <div className='relative'>
 
         <Header />

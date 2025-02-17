@@ -1,9 +1,10 @@
 import { Anchor, Button, Checkbox, Group, Input, PasswordInput, Radio } from "@mantine/core";
-import { IconAt, IconLock } from "@tabler/icons-react";
+import { IconAt, IconCheck, IconLock, IconX } from "@tabler/icons-react";
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { registerUser } from "../../services/UserService";
 import { SignupValidation } from "../../services/FormValidation";
+import { notifications } from '@mantine/notifications';
 
 const form = {
     name: "",
@@ -17,7 +18,7 @@ const Signup = () => {
 
     const [data, setData] = useState<{[key: string]:string}>(form)
     const [formError, setFormError] = useState<{[key: string]:string}>(form)
-
+    const navigate = useNavigate();
     const handleChange = (event: any) => {
         // console.log(event)
         if (typeof (event) == "string") {
@@ -54,11 +55,36 @@ const Signup = () => {
         }
         setFormError(newFormError);
 
+        
         if (valid === true){
 
             registerUser(data).then((res) => {
                 console.log(res)
-            }).catch((err) => { console.log(err) });
+                setData(form);
+                notifications.show({
+                    title: 'Registered Succesffully',
+                    message: 'Redirecting to login page...',
+                    withCloseButton:true,
+                    icon:<IconCheck style={{width:"90%", height:"90%"}}  />,
+                    withBorder:true,
+                    className:'!border-green-500'
+                  })
+                  setTimeout(() => {
+                    navigate("/login");
+                  }, 4000);
+                
+            }).catch((err) => { 
+                console.log(err) 
+                notifications.show({
+                    title: 'Registration failed!',
+                    message: err.response.data.errorMessage,
+                    withCloseButton:true,
+                    icon:<IconX style={{width:"90%", height:"90%"}}  />,
+                    color:'red',
+                    withBorder:true,
+                    className:'!border-red-500'
+                  })
+            });
         }
     }
 
@@ -98,7 +124,7 @@ const Signup = () => {
 
                 <Button onClick={handleSubmit} variant="filled">Create Account</Button>
 
-                <div className="mx-auto capitalize">Have an account <Link to="/login" className="text-blue-500 hover:underline">Login</Link></div>
+                <div className="mx-auto capitalize">Have an account <span onClick={()=>{navigate("/login"); setFormError(form); setData(form);}} className="text-blue-500 hover:underline cursor-pointer">Login</span></div>
             </div>
         </>
     )
