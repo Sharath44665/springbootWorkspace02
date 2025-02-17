@@ -13,7 +13,7 @@ const form = {
 }
 
 const Signup = () => {
-    const [value, setValue] = useState('react');
+    
     const [data, setData] = useState(form)
 
     const handleChange= (event:any) => {

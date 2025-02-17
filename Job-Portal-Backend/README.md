@@ -30,3 +30,12 @@ register user
 - front end code check
 
 ![register user](./img/axiosFrontEnd.png)
+
+---
+update Login with backend 
+
+![loginWithBackend](./img/loginWithBackend.png)
+
+if you pass incorrect data you should get following errors:
+
+![login errors](./img/loginErrors.png)
