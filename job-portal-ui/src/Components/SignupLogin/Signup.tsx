@@ -15,8 +15,8 @@ const form = {
 
 const Signup = () => {
 
-    const [data, setData] = useState(form)
-    const [formError, setFormError] = useState(form)
+    const [data, setData] = useState<{[key: string]:string}>(form)
+    const [formError, setFormError] = useState<{[key: string]:string}>(form)
 
     const handleChange = (event: any) => {
         // console.log(event)
@@ -44,9 +44,22 @@ const Signup = () => {
     }
 
     const handleSubmit = () => {
-        registerUser(data).then((res) => {
-            console.log(res)
-        }).catch((err) => { console.log(err) });
+        let valid = true, newFormError: {[key: string]:string} ={};
+
+        for (let key in data ){
+            if (key === "accountType") continue;
+            if (key !== "confirmPassword") newFormError[key]=SignupValidation(key, data[key]);
+            else if(data[key] !== data["password"]) newFormError[key]="passswords do not match";
+            if (newFormError[key] ) valid = false;
+        }
+        setFormError(newFormError);
+
+        if (valid === true){
+
+            registerUser(data).then((res) => {
+                console.log(res)
+            }).catch((err) => { console.log(err) });
+        }
     }
 
     return (
