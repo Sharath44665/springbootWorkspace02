@@ -3,9 +3,10 @@ import { IconAt, IconLock } from "@tabler/icons-react";
 import { useState } from "react";
 import { Link } from "react-router";
 import { registerUser } from "../../services/UserService";
+import { SignupValidation } from "../../services/FormValidation";
 
 const form = {
-    name :"",
+    name: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -13,20 +14,39 @@ const form = {
 }
 
 const Signup = () => {
-    
+
     const [data, setData] = useState(form)
+    const [formError, setFormError] = useState(form)
 
-    const handleChange= (event:any) => {
+    const handleChange = (event: any) => {
         // console.log(event)
-        if (typeof(event) == "string") setData({...data, accountType:event})
+        if (typeof (event) == "string") {
 
-        else setData({...data, [event.target.name]:event.target.value})
+            setData({ ...data, accountType: event })
+        }
+
+        else {
+            let name = event.target.name, value = event.target.value;
+
+            setData({ ...data, [name]: value });
+            setFormError({ ...formError, [name]: SignupValidation(name, value) })
+            if (name === "password" && data.confirmPassword !== "") {
+                let err=""
+                if (data.confirmPassword !== value) err="Passwords do not match";
+                else setFormError({ ...formError, [name]: SignupValidation(name, value) })
+
+            }
+            if (name === "confirmPassword") {
+                if (data.password !== value) setFormError({ ...formError, [name]: "password do not match" });
+                else setFormError({ ...formError, confirmPassword: "" })
+            }
+        }
     }
 
     const handleSubmit = () => {
-        registerUser(data).then((res)=>{
+        registerUser(data).then((res) => {
             console.log(res)
-        }).catch((err) => {console.log(err)});
+        }).catch((err) => { console.log(err) });
     }
 
     return (
@@ -34,27 +54,27 @@ const Signup = () => {
             <div className="w-1/2 px-20 flex flex-col gap-3 justify-center">
 
                 <div className="text-2xl font font-semibold">Create Account</div>
-                <Input.Wrapper label="Full Name" withAsterisk >
+                <Input.Wrapper label="Full Name" withAsterisk error={formError.name}>
                     <Input value={data.name} onChange={handleChange} name="name" placeholder="Your name: Sharath chandra" />
                 </Input.Wrapper>
 
-                <Input.Wrapper label="Email" withAsterisk >
+                <Input.Wrapper label="Email" error={formError.email} withAsterisk >
                     <Input value={data.email} onChange={handleChange} name="email" placeholder="Your email" leftSection={<IconAt size={16} />} />
                 </Input.Wrapper>
 
-                <PasswordInput value={data.password} onChange={handleChange} name="password" withAsterisk leftSection={<IconLock size={18} stroke={1.5} />} label="Password" placeholder="Strong password" />
-                <PasswordInput value={data.confirmPassword} onChange={handleChange} name="confirmPassword" withAsterisk leftSection={<IconLock size={18} stroke={1.5} />} label="Confirm Password" placeholder="Retype password" />
+                <PasswordInput value={data.password} onChange={handleChange} name="password" error={formError.password} withAsterisk leftSection={<IconLock size={18} stroke={1.5} />} label="Password" placeholder="Strong password" />
+                <PasswordInput value={data.confirmPassword} onChange={handleChange} name="confirmPassword" error={formError.confirmPassword} withAsterisk leftSection={<IconLock size={18} stroke={1.5} />} label="Confirm Password" placeholder="Retype password" />
                 <Radio.Group
                     value={data.accountType}
                     onChange={handleChange}
-                    label="You are?" 
+                    label="You are?"
                     withAsterisk
                 >
                     <Group mt="xs">
 
                         <Radio className="py-4 px-6 border has-[:checked]:border-blue-500 border-gray-200 rounded-lg" autoContrast value="APPLICANT" label="Applicant" />
                         <Radio className="py-4 px-6 border has-[:checked]:border-blue-500 border-gray-200 rounded-lg" autoContrast value="EMPLOYER" label="Employer" />
-                        
+
                     </Group>
                 </Radio.Group>
                 <Checkbox
