@@ -74,4 +74,6 @@ change password:
 
 ![change password](./img/changePassword.png)
 
+> you can check the same in databse, which should be effectively changed
+
 
