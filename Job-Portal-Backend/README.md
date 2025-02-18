@@ -56,3 +56,17 @@ email success:
 stylish otp:
 
 ![stylish otp](./img/StylishOtp.png)
+
+---
+verifying otp:
+
+![verified](./img/otpVerified.png)
+
+invalid otp:
+
+![invalid](./img/incorrectOtp.png)
+
+expired otp:
+![expired](./img/expiredOtp.png)
+
+

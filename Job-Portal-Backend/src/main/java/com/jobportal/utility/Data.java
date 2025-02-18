@@ -1,7 +1,7 @@
 package com.jobportal.utility;
 
 public class Data {
-    public static String getMsgBody(String otp){
+    public static String getMsgBody(String otp, String name){
         String htmlContent = "<html>"
                 + "<head>"
                 + "<style>"
@@ -15,7 +15,8 @@ public class Data {
                 + "</head>"
                 + "<body>"
                 + "<div class='container'>"
-                + "<h1>Your OTP Code</h1>"
+                + "<p>Hello "+name+",</p>"
+                + "<h1>Your OTP Code for Job portal (ijobs)</h1>"
                 + "<p>Your OTP code is:</p>"
                 + "<div class='otp'>" + otp + "</div>"
                 + "<p>Please use this code to complete your verification.</p>"

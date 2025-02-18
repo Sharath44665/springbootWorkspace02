@@ -38,4 +38,11 @@ public class UserAPI {
         return new ResponseEntity<>(new ResponseDTO("OTP sent successfully"), HttpStatus.OK);
 
     }
+
+    @GetMapping ("/verify-otp/{email}/{otp}")
+    public ResponseEntity<ResponseDTO> verifyOTP(@PathVariable String email, @PathVariable String otp) throws JobPortalException {
+        userService.verifyOTP(email,otp);
+        return new ResponseEntity<>(new ResponseDTO("OTP verified"), HttpStatus.OK);
+
+    }
 }

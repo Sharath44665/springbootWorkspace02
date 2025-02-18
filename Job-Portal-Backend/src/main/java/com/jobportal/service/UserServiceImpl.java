@@ -55,16 +55,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean sendOtp(String email) throws Exception {
-        userRepository.findByEmail(email).orElseThrow(()-> new JobPortalException("USER_NOT_FOUND"));
+        User user= userRepository.findByEmail(email).orElseThrow(()-> new JobPortalException("USER_NOT_FOUND"));
         MimeMessage mm= mailSender.createMimeMessage();
         MimeMessageHelper message = new MimeMessageHelper(mm, true);
         message.setTo(email);
-        message.setSubject("Your OTP Code");
+        message.setSubject("Your OTP Code for Job portal - ijobs");
         String genOtp =  Utilities.generateOTP();
         OTP otp = new OTP(email, genOtp, LocalDateTime.now());
         otpRepository.save(otp);
-        message.setText(Data.getMsgBody(genOtp), true);
+        message.setText(Data.getMsgBody(genOtp, user.getName()), true);
         mailSender.send(mm);
+        return true;
+    }
+
+    @Override
+    public Boolean verifyOTP(String email, String otp) throws JobPortalException {
+        OTP otpEntity = otpRepository.findById(email).orElseThrow(()-> new JobPortalException("OTP_NOT_FOUND"));
+
+        if(!otpEntity.getOtpCode().equals(otp)) throw new JobPortalException("OTP_INCORRECT");
         return true;
     }
 }
