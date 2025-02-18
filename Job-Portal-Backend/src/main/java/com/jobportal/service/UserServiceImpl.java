@@ -7,6 +7,7 @@ import com.jobportal.entity.User;
 import com.jobportal.exceptions.JobPortalException;
 import com.jobportal.repository.OTPRepository;
 import com.jobportal.repository.UserRepository;
+import com.jobportal.utility.Data;
 import com.jobportal.utility.Utilities;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +63,7 @@ public class UserServiceImpl implements UserService {
         String genOtp =  Utilities.generateOTP();
         OTP otp = new OTP(email, genOtp, LocalDateTime.now());
         otpRepository.save(otp);
-        message.setText("Your One time password is: "+genOtp, false);
+        message.setText(Data.getMsgBody(genOtp), true);
         mailSender.send(mm);
         return true;
     }

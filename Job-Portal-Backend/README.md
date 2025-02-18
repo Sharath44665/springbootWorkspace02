@@ -52,3 +52,7 @@ success:
 email success:
 
 ![email success](./img/otpSuccessEmail.png)
+
+stylish otp:
+
+![stylish otp](./img/StylishOtp.png)
