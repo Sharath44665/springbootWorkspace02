@@ -69,4 +69,9 @@ invalid otp:
 expired otp:
 ![expired](./img/expiredOtp.png)
 
+---
+change password:
+
+![change password](./img/changePassword.png)
+
 
