@@ -16,4 +16,20 @@ const SignupValidation = (name:string, value: string) => {
     }
 }
 
-export {SignupValidation}
+
+const LoginValidation = (name:string, value: string) => {
+    switch(name){
+      
+        case "email":
+            if (value.length === 0) return "Email is required"; 
+            return "";
+        case "password":
+            if (value.length === 0) return "Password is required";
+            
+            return ""
+        default:
+            return ""
+    }
+}
+
+export {SignupValidation, LoginValidation}
