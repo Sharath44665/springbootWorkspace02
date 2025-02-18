@@ -39,3 +39,16 @@ update Login with backend
 if you pass incorrect data you should get following errors:
 
 ![login errors](./img/loginErrors.png)
+
+---
+send otp to user
+
+![postman error](./img/otpError.png)
+
+success:
+
+![postman success](./img/otpSuccess.png)
+
+email success:
+
+![email success](./img/otpSuccessEmail.png)
