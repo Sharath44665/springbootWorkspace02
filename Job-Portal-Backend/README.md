@@ -94,4 +94,8 @@ using redux, storing user in Local storage:
 
 ![user local storage](./img/storingUserLocalStorage.png)
 
+after loggin out we can remove it, code is in the ui: `Header/ProfileMenu.tsx`
+
+
+
 

@@ -5,9 +5,15 @@ import {
     IconFileText,
     IconLogout2,
 } from '@tabler/icons-react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router';
+import { removeUser } from '../../Slices/UserSlice';
 
 const ProfileMenu = () => {
+    const dispatch = useDispatch();
+    const handleLogout = () => {
+        dispatch(removeUser());
+    }
     return (
         <Menu shadow="md" width={200}>
             <Menu.Target>
@@ -40,6 +46,7 @@ const ProfileMenu = () => {
 
                 <Menu.Item
                     color="red"
+                    onClick={handleLogout}
                     leftSection={<IconLogout2 size={14} />}
                 >
                     Log out
