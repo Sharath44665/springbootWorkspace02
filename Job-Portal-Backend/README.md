@@ -87,3 +87,11 @@ forget password:
 ![forget password ](./img/forgetPassword3.png)
 
 ![forget password ](./img/forgetPassword4.png) 
+
+---
+
+using redux, storing user in Local storage:
+
+![user local storage](./img/storingUserLocalStorage.png)
+
+

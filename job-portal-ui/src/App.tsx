@@ -2,9 +2,9 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import { Routes, Route } from "react-router";
 import '@mantine/core/styles.css';
-import { createTheme, MantineProvider } from '@mantine/core'; 
+import { createTheme, MantineProvider } from '@mantine/core';
 import './App.css'
-import HomePage from './Pages/Homepage'; 
+import HomePage from './Pages/Homepage';
 import Footer from './Components/Footer/Footer';
 import FindJob from './Pages/FindJob';
 import FindTalent from './Pages/FindTalent';
@@ -21,6 +21,8 @@ import ErrorPage from './Pages/ErrorPage';
 import Header from './Components/Header/Header';
 import '@mantine/notifications/styles.css';
 import { Notifications } from '@mantine/notifications';
+import { Provider } from 'react-redux'
+import Store from './Store';
 
 const theme = createTheme({
   colors: {
@@ -46,32 +48,35 @@ function App() {
 
   return (
     <>
-      <MantineProvider theme={theme}>
-      <Notifications position="top-center" zIndex={1000} />
-        <div className='relative'>
+      <Provider store={Store} >
+        <MantineProvider theme={theme}>
+          <Notifications position="top-center" zIndex={1000} />
+          <div className='relative'>
 
-        <Header />
-        <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/findjob" element={<FindJob />} />
-        <Route path="/findtalent" element={<FindTalent />} />
-        <Route path="/jobs" element={<JobDescPage />} />
-        <Route path="/apply-job" element={<ApplyJob />} />
-        <Route path="/company" element={<CompanyPage />} />
-        <Route path="/talent-profile" element={<TalentProfile />} />
-        <Route path="/pjob" element={<PostJobPage />} />
-        <Route path="/posted-jobs" element={<PostedJobsPage />} />
-        <Route path="/jhistory" element={<JobHistoryPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/login" element={<SignupPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/*" element={<ErrorPage />} />
-        
-      </Routes>
-        <Footer/>
-        </div>
+            <Header />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/findjob" element={<FindJob />} />
+              <Route path="/findtalent" element={<FindTalent />} />
+              <Route path="/jobs" element={<JobDescPage />} />
+              <Route path="/apply-job" element={<ApplyJob />} />
+              <Route path="/company" element={<CompanyPage />} />
+              <Route path="/talent-profile" element={<TalentProfile />} />
+              <Route path="/pjob" element={<PostJobPage />} />
+              <Route path="/posted-jobs" element={<PostedJobsPage />} />
+              <Route path="/jhistory" element={<JobHistoryPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+              <Route path="/login" element={<SignupPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/*" element={<ErrorPage />} />
 
-      </MantineProvider>
+            </Routes>
+            <Footer />
+          </div>
+
+        </MantineProvider>
+
+      </Provider>
 
 
     </>
