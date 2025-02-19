@@ -1,9 +1,10 @@
-import { Button, Input, Modal, PasswordInput, PinInput, TextInput } from "@mantine/core";
+import { Button, Modal, PasswordInput, PinInput, TextInput } from "@mantine/core";
 import { IconAt, IconLock } from "@tabler/icons-react";
 import { useState } from "react";
 import { changePass, sendOtp, verfiyOtp } from "../../services/UserService";
 import { SignupValidation } from "../../services/FormValidation";
 import { errorNotification, successNotification } from "../../services/NotificationService";
+import { useInterval } from "@mantine/hooks";
 
 const ResetPassword = (props: any) => {
     const [email, setEmail] = useState("");
@@ -12,6 +13,16 @@ const ResetPassword = (props: any) => {
     const [otpSent, setOtpSent] = useState(false);
     const [otpSending, setOtpSending] = useState(false);
     const [verified, setVerified] = useState(false);
+    const [resendLoader, setResendLoader] = useState(false)
+    const [seconds, setSeconds] = useState(60);
+  const interval = useInterval(() => {
+    if (seconds === 0){
+        setResendLoader(false);
+        setSeconds(60);
+        interval.stop();
+    }
+    else 
+    setSeconds((s) => s - 1)}, 1000);
 
     const handleSendOtp = () => {
         setOtpSending(true);
@@ -20,6 +31,8 @@ const ResetPassword = (props: any) => {
             console.log(res)
             successNotification("OTP sent successfully, please check your mail...!", "Enter OTP to reset.")
             setOtpSending(false)
+            setResendLoader(true)
+            interval.start();
         }).catch((err) => {
             console.log(err);
             setOtpSending(false)
@@ -42,11 +55,17 @@ const ResetPassword = (props: any) => {
     }
 
     const resendOtp = () => {
-
+        // console.log("clicked on resend otp")
+        if (resendLoader) return;
+        handleSendOtp();
     }
 
     const changeEmail = () => {
         setOtpSent(false)
+        setResendLoader(false)
+        setSeconds(60)
+        setVerified(false)
+        interval.stop();
     }
 
     const handleResetPassword = () => {
@@ -67,15 +86,15 @@ const ResetPassword = (props: any) => {
                     label="Email"
                     value={email} onChange={(e) => setEmail(e.target.value)} name="email"
                     placeholder="Your email" size="md" leftSection={<IconAt size={16} />}
-                    rightSection={<Button loading={otpSending} onClick={handleSendOtp} disabled={email === "" || otpSent} size="xs" className="mr-1 " variant="filled">login</Button>}
+                    rightSection={<Button loading={otpSending  && !otpSent} onClick={handleSendOtp} disabled={email === "" || otpSent} size="xs" className="mr-1 " variant="filled">login</Button>}
                     rightSectionWidth="xl"
                 />
                 {otpSent && <PinInput onComplete={handleVerifyOtp} type="number" length={6} className="mx-auto" size="md" gap="lg" />}
                 {
                     otpSent && !verified &&
                     <div className="flex gap-2">
-                        <Button fullWidth loading={otpSending} onClick={resendOtp} variant="light">Resend</Button>
-                        <Button fullWidth loading={otpSending} onClick={changeEmail} autoContrast variant="filled">Change Email</Button>
+                        <Button fullWidth loading={otpSending} onClick={resendOtp} variant="light">{resendLoader? seconds:"Resend OTP"}</Button>
+                        <Button fullWidth onClick={changeEmail} autoContrast variant="filled">Change Email</Button>
                     </div>
                 }
 
