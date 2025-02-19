@@ -5,12 +5,13 @@ import {
     IconFileText,
     IconLogout2,
 } from '@tabler/icons-react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router';
 import { removeUser } from '../../Slices/UserSlice';
 
 const ProfileMenu = () => {
     const dispatch = useDispatch();
+    const user = useSelector((state:any) => state.user)
     const handleLogout = () => {
         dispatch(removeUser());
     }
@@ -20,7 +21,7 @@ const ProfileMenu = () => {
 
                 <div className='flex items-center cursor-pointer'>
                     <Avatar src="avatar.png" alt="it's me" />
-                    <div>Sharath</div>
+                    <div>{user.name}</div>
                 </div>
 
             </Menu.Target>

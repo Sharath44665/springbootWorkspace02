@@ -1,10 +1,12 @@
-import { Indicator } from '@mantine/core';
+import { Button, Indicator } from '@mantine/core';
 import { IconAsset, IconBell, IconSettings } from '@tabler/icons-react';
 import NavLinks from './NavLinks';
 import { Link, useLocation } from 'react-router';
 import DarkMode from './DarkMode';
 import ProfileMenu from './ProfileMenu';
+import { useSelector } from 'react-redux';
 const Header = () => {
+    const user = useSelector((state: any) => state.user)
     const location = useLocation()
     return location.pathname != '/signup' && location.pathname != '/login' ? (
         <>
@@ -22,7 +24,11 @@ const Header = () => {
                         </Indicator>
                     </div>
 
-                    <ProfileMenu />
+                    {
+                        user ? <ProfileMenu /> : <Link to="/login">
+                            <Button variant='subtle'>Login</Button>
+                        </Link>
+                    }
                     <div className='bg-stone-700 p-1 rounded-full'>
 
                         <IconSettings stroke={2} />
