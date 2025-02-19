@@ -76,4 +76,14 @@ change password:
 
 > you can check the same in databse, which should be effectively changed
 
+in the ui:
 
+forget password:
+
+![forget password ](./img/forgetPasswd.png)
+
+![forget password ](./img/forgetPassword2.png)
+
+![forget password ](./img/forgetPassword3.png)
+
+![forget password ](./img/forgetPassword4.png)
