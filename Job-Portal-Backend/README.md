@@ -96,6 +96,24 @@ using redux, storing user in Local storage:
 
 after loggin out we can remove it, code is in the ui: `Header/ProfileMenu.tsx`
 
+---
 
+Profile creation
+1. delete all users from mongodb
+2. in `sequence` collection **add row** with 
+
+``` json
+"_id":"profiles",
+"seq":0
+```
+3. in `sequence` collection **update**
+
+``` json
+"_id":"users",
+"seq":0
+```
+4. run the ui, and backend which will give below result
+
+![profile creation](./img/profileCreation.png)
 
 
