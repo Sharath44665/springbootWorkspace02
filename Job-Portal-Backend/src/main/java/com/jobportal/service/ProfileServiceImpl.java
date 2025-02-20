@@ -1,5 +1,6 @@
 package com.jobportal.service;
 
+import com.jobportal.dto.ProfileDto;
 import com.jobportal.entity.Profile;
 import com.jobportal.exceptions.JobPortalException;
 import com.jobportal.repository.ProfileRepository;
@@ -25,5 +26,17 @@ public class ProfileServiceImpl implements ProfileService{
         profile.setCertifications(new ArrayList<>());
         profileRepository.save(profile);
         return profile.getId();
+    }
+
+    @Override
+    public ProfileDto getProfile(Long id) throws JobPortalException {
+        return profileRepository.findById(id).orElseThrow(() -> new JobPortalException("PROFILE_NOT_FOUND")).toDto();
+    }
+
+    @Override
+    public ProfileDto updateProfile(ProfileDto profileDto) throws JobPortalException {
+        profileRepository.findById(profileDto.getId()).orElseThrow(() -> new JobPortalException("PROFILE_NOT_FOUND"));
+        profileRepository.save(profileDto.toEntity());
+        return profileDto;
     }
 }

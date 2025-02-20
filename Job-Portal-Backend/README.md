@@ -116,4 +116,9 @@ Profile creation
 
 ![profile creation](./img/profileCreation.png)
 
+---
+
+get profile via api
+
+![get profile api](./img/getProfilePostman.png)
 
