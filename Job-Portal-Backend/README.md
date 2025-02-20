@@ -122,3 +122,16 @@ get profile via api
 
 ![get profile api](./img/getProfilePostman.png)
 
+---
+
+update profile via api
+
+![postman update](./img/updatePostman.png)
+
+update mongo
+
+![mongo update](./img/updateMongo.png)
+
+
+
+
