@@ -1,6 +1,7 @@
 import { Button } from "@mantine/core";
 import { useState } from "react";
 import ExpInput from "./ExpInput";
+import { formatDate } from "../../services/Utilities";
 
 const ExpCard = (props: any) => {
     const [edit, setEdit]= useState(false)
@@ -20,7 +21,7 @@ const ExpCard = (props: any) => {
                     </div>
                 </div>
                 <div>
-                    {props.startDate} - {props.endDate}
+                    {formatDate(props.startDate)} - {formatDate(props.endDate)}
                 </div>
             </div>
             <div className="text-justify">
