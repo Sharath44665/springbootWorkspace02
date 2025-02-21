@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "../../services/ProfileService";
 import Info from "./Info";
 import { setProfile } from "../../Slices/ProfileSlice";
+import About from "./About";
 
 const Profile = (props: any) => {
     const dispatch = useDispatch();
@@ -55,29 +56,7 @@ const Profile = (props: any) => {
 
                 </div>
                 <Divider my='xl' />
-                <div>
-                    <div className="text-2xl font-semibold mb-3 flex justify-between">
-                        About
-                        <ActionIcon size='lg' variant="subtle" onClick={() => handleEdit(1)} >
-                            {
-                                edit[1] ? <IconDeviceFloppy className="h-4/5 w-4/5" /> : <IconPencil className="h-4/5 w-4/5" />
-                            }
-                        </ActionIcon>
-                    </div>
-                    {
-                        edit[1] ? <Textarea
-                            label="description"
-                            value={about}
-                            autosize
-                            minRows={3}
-                            withAsterisk
-                            placeholder="Description (Describe yourself)"
-                            onChange={(event) => setAbout(event.currentTarget.value)}
-                        /> : <div className="text-justify">{profileUser?.about}</div>
-                    }
-
-
-                </div>
+                    <About />
                 <Divider my='xl' />
                 <div>
                     <div className="text-2xl font-semibold mb-3 flex justify-between">

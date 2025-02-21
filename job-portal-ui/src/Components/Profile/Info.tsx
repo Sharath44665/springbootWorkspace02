@@ -48,13 +48,13 @@ const Info = (props: any) => {
                 {
                     edit && <ActionIcon size='lg' variant="subtle" onClick={handleSave} >
                         {
-                            <IconCheck className="h-4/5 w-4/5" />
+                            <IconCheck className="h-4/5 w-4/5" color="green" />
                         }
                     </ActionIcon>
                 }
                 <ActionIcon size='lg' variant="subtle" onClick={handleEdit} >
                     {
-                        edit ? <IconX className="h-4/5 w-4/5" /> : <IconPencil className="h-4/5 w-4/5" />
+                        edit ? <IconX className="h-4/5 w-4/5" color="red" /> : <IconPencil className="h-4/5 w-4/5" />
                     }
                 </ActionIcon>
             </div>
