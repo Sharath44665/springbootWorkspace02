@@ -136,6 +136,10 @@ show profile Backend Data in console
 
 ![profile backend](./img/showProfileBackendData.png)
 
+profile update from front end:
+
+![profile info update](./img/profileInfoUpdateUI.png)
+
 
 
 

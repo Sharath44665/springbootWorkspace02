@@ -1,11 +1,9 @@
 import { ActionIcon, Divider, TagsInput, Textarea } from "@mantine/core";
-import { IconBriefcase, IconCurrentLocation, IconDeviceFloppy, IconPencil, IconPlus } from "@tabler/icons-react";
+import { IconDeviceFloppy, IconPencil, IconPlus } from "@tabler/icons-react";
 import CertificationCard from "./CertificationCard";
 import ExpCard from "./ExpCard";
 import { useEffect, useState } from "react";
-import SelectInput from "./SelectInput";
 import fields from "../../Data/Profile";
-import { profile } from "../../Data/TalentData";
 import ExpInput from "./ExpInput";
 import CertificationInput from "./CertificationInput";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,7 +21,7 @@ const Profile = (props: any) => {
         newEdit[idx] = !newEdit[idx]
         setEdit(newEdit)
 
-        console.log(edit)
+        // console.log(edit)
     }
 
     useEffect(() => { 
@@ -32,7 +30,7 @@ const Profile = (props: any) => {
 
         getProfile(user.id).then((data:any) => {
             dispatch(setProfile(data));
-            console.log(data)
+            // console.log(data)
         }).catch((error) => {
             console.log(error)
         });
