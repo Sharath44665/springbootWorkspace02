@@ -132,6 +132,10 @@ update mongo
 
 ![mongo update](./img/updateMongo.png)
 
+show profile Backend Data in console
+
+![profile backend](./img/showProfileBackendData.png)
+
 
 
 

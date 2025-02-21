@@ -15,6 +15,7 @@
     "@mantine/carousel": "^7.16.2",
     "@mantine/core": "^7.16.2",
     "@mantine/dates": "^7.16.2",
+    "@mantine/form": "^7.17.0",
     "@mantine/hooks": "^7.16.2",
     "@mantine/notifications": "^7.16.3",
     "@mantine/tiptap": "^7.16.2",

@@ -2,14 +2,18 @@ import { ActionIcon, Divider, TagsInput, Textarea } from "@mantine/core";
 import { IconBriefcase, IconCurrentLocation, IconDeviceFloppy, IconPencil, IconPlus } from "@tabler/icons-react";
 import CertificationCard from "./CertificationCard";
 import ExpCard from "./ExpCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SelectInput from "./SelectInput";
 import fields from "../../Data/Profile";
 import { profile } from "../../Data/TalentData";
 import ExpInput from "./ExpInput";
 import CertificationInput from "./CertificationInput";
+import { useSelector } from "react-redux";
+import { getProfile } from "../../services/ProfileService";
 
 const Profile = (props: any) => {
+    const user = useSelector((state:any)=> state.user)
+    // const profileUser = useSelector((state:any) => state.profile)
     const [edit, setEdit] = useState([false, false, false, false, false])
     const handleEdit = (idx: any) => {
         const newEdit = [...edit]
@@ -18,6 +22,14 @@ const Profile = (props: any) => {
 
         console.log(edit)
     }
+
+    useEffect(() => { 
+        getProfile(user.id).then((data:any) => {
+            console.log(data)
+        }).catch((error) => {
+            console.log(error)
+        });
+    },[])
     const [about, setAbout] = useState('As a Software Engineer at Google, I specialize in building scalable and high-performance applications. My expertise lies in integrating front-end and back-end technologies to deliver seamless user experiences. With a strong foundation in React and SpringBoot, and a focus on MongoDB for database solutions, I am passionate about leveraging the latest technologies to solve complex problems and drive innovation. My goal is to create impactful software that enhances productivity and meets user needs effectively.');
 
     const [skills, setSkills] = useState<string[]>(['React', 'Spring Boot', 'Java', 'Python', 'Node.js', 'MongoDB', 'Express', 'Django', 'PostgreSQL']);
