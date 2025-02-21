@@ -24,7 +24,7 @@ const About = () => {
         setEdit(false)
         let updatedProfile = { ...profile, about:about }
         dispatch(changeProfile(updatedProfile))
-        successNotification("Success", "Profile updated Successfully")
+        successNotification("Success", "About updated Successfully")
     }
     return (<>
         <div>

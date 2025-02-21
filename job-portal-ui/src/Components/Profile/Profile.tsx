@@ -11,6 +11,7 @@ import { getProfile } from "../../services/ProfileService";
 import Info from "./Info";
 import { setProfile } from "../../Slices/ProfileSlice";
 import About from "./About";
+import Skills from "./Skills";
 
 const Profile = (props: any) => {
     const dispatch = useDispatch();
@@ -36,7 +37,7 @@ const Profile = (props: any) => {
             console.log(error)
         });
     },[])
-    const [about, setAbout] = useState('As a Software Engineer at Google, I specialize in building scalable and high-performance applications. My expertise lies in integrating front-end and back-end technologies to deliver seamless user experiences. With a strong foundation in React and SpringBoot, and a focus on MongoDB for database solutions, I am passionate about leveraging the latest technologies to solve complex problems and drive innovation. My goal is to create impactful software that enhances productivity and meets user needs effectively.');
+    
 
     const [skills, setSkills] = useState<string[]>(['React', 'Spring Boot', 'Java', 'Python', 'Node.js', 'MongoDB', 'Express', 'Django', 'PostgreSQL']);
 
@@ -58,36 +59,7 @@ const Profile = (props: any) => {
                 <Divider my='xl' />
                     <About />
                 <Divider my='xl' />
-                <div>
-                    <div className="text-2xl font-semibold mb-3 flex justify-between">
-                        Skills
-                        <ActionIcon size='lg' variant="subtle" onClick={() => handleEdit(2)} >
-                            {
-                                edit[2] ? <IconDeviceFloppy className="h-4/5 w-4/5" /> : <IconPencil className="h-4/5 w-4/5" />
-                            }
-                        </ActionIcon>
-
-                    </div>
-
-                    {
-                        edit[2] ? <TagsInput
-                            value={skills}
-                            onChange={setSkills}
-                            placeholder="Add skill"
-                            splitChars={[',', ' ', '|']}
-                        /> : <div className="flex flex-wrap gap-2">
-                            {
-                                profileUser?.skills?.map((skill: any, id: any) => {
-                                    return (
-                                        <div key={id} className="text-white bg-black font-medium bg-opacity-10 rounded-3xl px-3 py-1">{skill}</div>
-                                    )
-                                })
-                            }
-                        </div>
-                    }
-
-
-                </div>
+                    <Skills />
                 <Divider my='xl' />
                 <div>
                     <div className="text-2xl font-semibold mb-3 flex justify-between">
