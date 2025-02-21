@@ -12,6 +12,7 @@ import Info from "./Info";
 import { setProfile } from "../../Slices/ProfileSlice";
 import About from "./About";
 import Skills from "./Skills";
+import Experience from "./Experience";
 
 const Profile = (props: any) => {
     const dispatch = useDispatch();
@@ -61,29 +62,7 @@ const Profile = (props: any) => {
                 <Divider my='xl' />
                     <Skills />
                 <Divider my='xl' />
-                <div>
-                    <div className="text-2xl font-semibold mb-3 flex justify-between">
-                        Experience
-                        <div>
-                            <ActionIcon size='lg' variant="subtle" onClick={() => setAddExp(true)} >
-                                <IconPlus className="h-4/5 w-4/5" /> 
-                            </ActionIcon>
-                            <ActionIcon size='lg' variant="subtle" onClick={() => handleEdit(3)} >
-                                {
-                                    edit[3] ? <IconDeviceFloppy className="h-4/5 w-4/5" /> : <IconPencil className="h-4/5 w-4/5" />
-                                }
-                            </ActionIcon>
-                        </div>
-
-                    </div>
-                    {
-                    profileUser?.experiences?.map((expItem: any, id: any) => <ExpCard key={id} {...expItem} edit={edit[3]} />)
-                    }
-                    {addExp && <ExpInput setEdit={setAddExp} add /> }
-                    
-
-                </div>
-
+                    <Experience /> 
                 <Divider my='xl' />
                 <div>
                     <div className="text-2xl font-semibold mb-3 flex justify-between ">

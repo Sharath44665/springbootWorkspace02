@@ -17,11 +17,11 @@ const ExpCard = (props: any) => {
                     </div>
                     <div>
                         <div className="text-lg">{props.title}</div>
-                        <div>{props.company} &middot; {props.company}</div>
+                        <div>{props.company} &middot; {props.location}</div>
                     </div>
                 </div>
                 <div>
-                    {formatDate(props.startDate)} - {formatDate(props.endDate)}
+                    {formatDate(props.startDate)} - {props.working?'Present':formatDate(props.endDate)}
                 </div>
             </div>
             <div className="text-justify">
@@ -34,7 +34,7 @@ const ExpCard = (props: any) => {
                 </div>
             }
 
-        </div>: <ExpInput setEdit={setEdit} />
+        </div>: <ExpInput {...props} setEdit={setEdit} />
         }
 
             
