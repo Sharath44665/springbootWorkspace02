@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { updateProfile } from '../services/ProfileService';
 
-const ProfileSlice = createSlice({
+const profileSlice = createSlice({
     name: "profile",
     initialState: {},
     reducers: {
@@ -18,6 +18,6 @@ const ProfileSlice = createSlice({
     }
 })
 
-export const { changeProfile, setProfile } = ProfileSlice.actions;
-export default ProfileSlice.reducer;
+export const { changeProfile, setProfile } = profileSlice.actions;
+export default profileSlice.reducer;
 

@@ -8,12 +8,15 @@ import fields from "../../Data/Profile";
 import { profile } from "../../Data/TalentData";
 import ExpInput from "./ExpInput";
 import CertificationInput from "./CertificationInput";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "../../services/ProfileService";
+import Info from "./Info";
+import { setProfile } from "../../Slices/ProfileSlice";
 
 const Profile = (props: any) => {
+    const dispatch = useDispatch();
     const user = useSelector((state:any)=> state.user)
-    // const profileUser = useSelector((state:any) => state.profile)
+    const profileUser = useSelector((state:any) => state.profile)
     const [edit, setEdit] = useState([false, false, false, false, false])
     const handleEdit = (idx: any) => {
         const newEdit = [...edit]
@@ -24,7 +27,11 @@ const Profile = (props: any) => {
     }
 
     useEffect(() => { 
+        // console.log("profile user:")
+        // console.log(profileUser)
+
         getProfile(user.id).then((data:any) => {
+            dispatch(setProfile(data));
             console.log(data)
         }).catch((error) => {
             console.log(error)
@@ -46,27 +53,7 @@ const Profile = (props: any) => {
                     <img className="rounded-full w-48 h-48 absolute top-1/3 left-3 border-black border-8" src="/avatar.png" alt="banner" />
                 </div>
                 <div className="px-3 mt-15">
-                    <div className="text-3xl font-semibold flex justify-between">{props.name}<ActionIcon size='lg' variant="subtle" onClick={() => handleEdit(0)} >
-                        {
-                            edit[0] ? <IconDeviceFloppy className="h-4/5 w-4/5" /> : <IconPencil className="h-4/5 w-4/5" />
-                        }
-                    </ActionIcon></div>
-                    {
-                        edit[0] ? <>
-                            <div className="flex gap-10 [&>*]:w-1/2 ">
-                                <SelectInput {...select[0]} />
-                                <SelectInput {...select[1]} />
-
-                            </div>
-                            <SelectInput {...select[2]} />
-                        </> : <>
-                            <div className="flex text-xl gap-1 items-center ">
-                                <IconBriefcase /> {props.role} &middot; {props.company}
-                            </div>
-                            <div className="flex text-gray-400 gap-1 items-center text-lg"><IconCurrentLocation /> {props.location}</div>
-                        </>
-                    }
-
+                    <Info/>
 
                 </div>
                 <Divider my='xl' />
@@ -88,7 +75,7 @@ const Profile = (props: any) => {
                             withAsterisk
                             placeholder="Description (Describe yourself)"
                             onChange={(event) => setAbout(event.currentTarget.value)}
-                        /> : <div className="text-justify">{about}</div>
+                        /> : <div className="text-justify">{profileUser?.about}</div>
                     }
 
 
@@ -113,7 +100,7 @@ const Profile = (props: any) => {
                             splitChars={[',', ' ', '|']}
                         /> : <div className="flex flex-wrap gap-2">
                             {
-                                skills.map((skill: any, id: any) => {
+                                profileUser?.skills?.map((skill: any, id: any) => {
                                     return (
                                         <div key={id} className="text-white bg-black font-medium bg-opacity-10 rounded-3xl px-3 py-1">{skill}</div>
                                     )
@@ -141,7 +128,7 @@ const Profile = (props: any) => {
 
                     </div>
                     {
-                    profile.experience.map((expItem: any, id: any) => <ExpCard key={id} {...expItem} edit={edit[3]} />)
+                    profileUser?.experiences?.map((expItem: any, id: any) => <ExpCard key={id} {...expItem} edit={edit[3]} />)
                     }
                     {addExp && <ExpInput setEdit={setAddExp} add /> }
                     
@@ -166,7 +153,7 @@ const Profile = (props: any) => {
                     <div className="flex flex-col gap-4">
 
                         {
-                            profile.certifications.map(
+                            profileUser?.certifications?.map(
                                 (certify: any, id: any) => <CertificationCard key={id} {...certify} edit={edit[4]} />
                             )
                         }
