@@ -2,9 +2,21 @@ import { Button } from "@mantine/core";
 import { useState } from "react";
 import ExpInput from "./ExpInput";
 import { formatDate } from "../../services/Utilities";
+import { useDispatch, useSelector } from "react-redux";
+import { changeProfile } from "../../Slices/ProfileSlice";
+import { successNotification } from "../../services/NotificationService";
 
 const ExpCard = (props: any) => {
+    const dispatch = useDispatch();
     const [edit, setEdit]= useState(false)
+    const profile = useSelector((state: any) => state.profile)
+    const handleDelete = () => {
+        let exp = [...profile.experiences];
+        exp.splice(props.idx, 1);
+        let updatedProfile = {...profile, experiences:exp} 
+        dispatch(changeProfile(updatedProfile))
+        successNotification('Success', 'Experience deleted succesfully')
+    }
     return  (
         <>
         {
@@ -29,8 +41,8 @@ const ExpCard = (props: any) => {
             </div>
             {
                 props.edit && <div className="flex gap-5">
-                    <Button onClick={()=> setEdit(true)} variant="outline" >Edit</Button>
-                    <Button color="red" variant="light" >Delete</Button>
+                    <Button onClick={()=> setEdit(true)} color="green" variant="light" >Edit</Button>
+                    <Button onClick={handleDelete} color="red" variant="light" >Delete</Button>
                 </div>
             }
 
