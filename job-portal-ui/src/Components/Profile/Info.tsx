@@ -1,48 +1,65 @@
 import { ActionIcon } from "@mantine/core";
 import fields from "../../Data/Profile";
 import { useState } from "react";
-import { IconBriefcase, IconCurrentLocation, IconDeviceFloppy, IconPencil } from "@tabler/icons-react";
+import { IconBriefcase, IconCheck, IconCurrentLocation, IconDeviceFloppy, IconPencil, IconX } from "@tabler/icons-react";
 import SelectInput from "./SelectInput";
 import { useForm } from '@mantine/form';
 import { useDispatch, useSelector } from "react-redux";
 import { changeProfile } from "../../Slices/ProfileSlice";
 import { successNotification } from "../../services/NotificationService";
 
-const Info = (props:any) => {
+const Info = (props: any) => {
     const select = fields;
     const dispatch = useDispatch();
-    const user = useSelector((state:any) => state.user)
-    const profile = useSelector((state:any)=>state.profile)
+    const user = useSelector((state: any) => state.user)
+    const profile = useSelector((state: any) => state.profile)
     const [edit, setEdit] = useState(false)
-    
-    const handleEdit =() => {
-        if (!edit){
+
+    const handleEdit = () => {
+        if (!edit) {
             setEdit(true)
-            form.setValues({jobTitle:profile.jobTitle, company: profile.company, location:profile.location})
+            form.setValues({ jobTitle: profile.jobTitle, company: profile.company, location: profile.location })
         }
         else {
             setEdit(false)
-            let updatedProfile = {...profile, ...form.getValues()}
-            dispatch(changeProfile(updatedProfile))
-            successNotification("Success", "Profile updated Successfully")
+           
             // console.log("form get values")
             // console.log(updatedProfile);
         }
     }
-    
+
     const form = useForm({
         mode: 'controlled',
-        initialValues: { jobTitle: '', company: '' , location:''},
-        
-      });
+        initialValues: { jobTitle: '', company: '', location: '' },
+
+    });
+
+    const handleSave = () => {
+        setEdit(false)
+        let updatedProfile = { ...profile, ...form.getValues() }
+        dispatch(changeProfile(updatedProfile))
+        successNotification("Success", "Profile updated Successfully")
+
+    }
 
     return (<>
-        <div className="text-3xl font-semibold flex justify-between">{user.name}<ActionIcon size='lg' variant="subtle" onClick={handleEdit} >
-            {
-                edit ? <IconDeviceFloppy className="h-4/5 w-4/5" /> : <IconPencil className="h-4/5 w-4/5" />
-            }
-        </ActionIcon></div>
-        
+        <div className="text-3xl font-semibold flex justify-between">{user.name}
+            <div>
+                {
+                    edit && <ActionIcon size='lg' variant="subtle" onClick={handleSave} >
+                        {
+                            <IconCheck className="h-4/5 w-4/5" />
+                        }
+                    </ActionIcon>
+                }
+                <ActionIcon size='lg' variant="subtle" onClick={handleEdit} >
+                    {
+                        edit ? <IconX className="h-4/5 w-4/5" /> : <IconPencil className="h-4/5 w-4/5" />
+                    }
+                </ActionIcon>
+            </div>
+        </div>
+
         {
             edit ? <>
                 <div className="flex gap-10 [&>*]:w-1/2 ">
