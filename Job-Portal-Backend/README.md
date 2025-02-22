@@ -140,6 +140,11 @@ profile update from front end:
 
 ![profile info update](./img/profileInfoUpdateUI.png)
 
+---
+api post jobs
+
+[post jobs](./img/apiPostJobs.png)
+
 
 
 

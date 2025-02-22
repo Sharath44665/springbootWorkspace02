@@ -1,15 +1,8 @@
-import { ActionIcon, Avatar, Divider, FileInput, Overlay, TagsInput, Textarea } from "@mantine/core";
-import { IconDeviceFloppy, IconEdit, IconPencil, IconPlus } from "@tabler/icons-react";
-import CertificationCard from "./CertificationCard";
-import ExpCard from "./ExpCard";
-import { useEffect, useState } from "react";
-import fields from "../../Data/Profile";
-import ExpInput from "./ExpInput";
-import CertificationInput from "./CertificationInput";
+import { Avatar, Divider, FileInput, Overlay } from "@mantine/core";
+import { IconEdit } from "@tabler/icons-react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfile } from "../../services/ProfileService";
 import Info from "./Info";
-import { changeProfile, setProfile } from "../../Slices/ProfileSlice";
+import { changeProfile } from "../../Slices/ProfileSlice";
 import About from "./About";
 import Skills from "./Skills";
 import Experience from "./Experience";
@@ -18,22 +11,9 @@ import { useHover } from "@mantine/hooks";
 import { successNotification } from "../../services/NotificationService";
 
 const Profile = () => {
-    const dispatch = useDispatch();
-    const user = useSelector((state: any) => state.user)
+    const dispatch = useDispatch(); 
     const profile = useSelector((state: any) => state.profile)
     
-
-    useEffect(() => {
-        // console.log("profile user:")
-        // console.log(profileUser)
-
-        getProfile(user.id).then((data: any) => {
-            dispatch(setProfile(data));
-            // console.log(data)
-        }).catch((error) => {
-            console.log(error)
-        });
-    }, [])
 
     const { hovered, ref } = useHover();
 
