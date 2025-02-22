@@ -1,5 +1,5 @@
-import { ActionIcon, Divider, TagsInput, Textarea } from "@mantine/core";
-import { IconDeviceFloppy, IconPencil, IconPlus } from "@tabler/icons-react";
+import { ActionIcon, Avatar, Divider, FileInput, Overlay, TagsInput, Textarea } from "@mantine/core";
+import { IconDeviceFloppy, IconEdit, IconPencil, IconPlus } from "@tabler/icons-react";
 import CertificationCard from "./CertificationCard";
 import ExpCard from "./ExpCard";
 import { useEffect, useState } from "react";
@@ -9,63 +9,94 @@ import CertificationInput from "./CertificationInput";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "../../services/ProfileService";
 import Info from "./Info";
-import { setProfile } from "../../Slices/ProfileSlice";
+import { changeProfile, setProfile } from "../../Slices/ProfileSlice";
 import About from "./About";
 import Skills from "./Skills";
 import Experience from "./Experience";
 import Certificate from "./Certificate";
+import { useHover } from "@mantine/hooks";
+import { successNotification } from "../../services/NotificationService";
 
-const Profile = (props: any) => {
+const Profile = () => {
     const dispatch = useDispatch();
-    const user = useSelector((state:any)=> state.user)
-    const profileUser = useSelector((state:any) => state.profile)
-    const [edit, setEdit] = useState([false, false, false, false, false])
-    const handleEdit = (idx: any) => {
-        const newEdit = [...edit]
-        newEdit[idx] = !newEdit[idx]
-        setEdit(newEdit)
+    const user = useSelector((state: any) => state.user)
+    const profile = useSelector((state: any) => state.profile)
+    
 
-        // console.log(edit)
-    }
-
-    useEffect(() => { 
+    useEffect(() => {
         // console.log("profile user:")
         // console.log(profileUser)
 
-        getProfile(user.id).then((data:any) => {
+        getProfile(user.id).then((data: any) => {
             dispatch(setProfile(data));
             // console.log(data)
         }).catch((error) => {
             console.log(error)
         });
-    },[])
-    
+    }, [])
 
-    const [skills, setSkills] = useState<string[]>(['React', 'Spring Boot', 'Java', 'Python', 'Node.js', 'MongoDB', 'Express', 'Django', 'PostgreSQL']);
+    const { hovered, ref } = useHover();
 
-    const [addExp, setAddExp] = useState(false);
-    const [addCerti, setAddCerti] = useState(false);
+    const handleFileChange = async (image:any) => {
+        let picture:any = await getBase64(image);
+        let updatedProfile = {...profile, picture:picture.split(',')[1]}
+        dispatch(changeProfile(updatedProfile))
+        successNotification("success", "Profile picture updated successfully")
 
-    const select = fields;
+    }
+
+    const getBase64 = (file:any)=> {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file)
+            reader.onload = () => resolve(reader.result)
+            reader.onerror = error => reject(error);
+        })
+    }
     return (
         <>
             <div className="w-4/5 mx-auto">
                 <div className="relative">
                     <img className="rounded-t-xl" src="/Profile/banner.jpg" alt="banner" />
-                    <img className="rounded-full w-48 h-48 absolute top-1/3 left-3 border-black border-8" src="/avatar.png" alt="banner" />
+                    <div ref={ref} className="absolute flex items-center justify-center top-1/3 left-3" >
+                        <Avatar className="!w-48 !h-48 border-black border-8" src={profile.picture?`data:image/jpeg;base64,${profile.picture}`: "/avatar.png"} alt="profile img" />
+                        {
+                            hovered && (
+                                <Overlay
+                                    gradient="linear-gradient(145deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0) 100%)" className="!rounded-full"
+                                    opacity={0.75}
+                                />
+                            ) 
+                        }
+
+                        {
+                            hovered && <IconEdit className="absolute z-[300] w-10 h-10 "/>
+                        }
+                        {
+                            hovered && <FileInput
+                            onChange={handleFileChange}
+                            className="absolute [&_*]:!rounded-full w-full z-[301] [&_*]:!h-full !h-full " 
+                            variant="transparent"
+                            size="lg"
+                            radius="xl"
+                            accept="image/png,image/jpeg" 
+                          />
+                        }
+                    </div>
+                    {/* <img className="rounded-full w-48 h-48 absolute top-1/3 left-3 border-black border-8" src="/avatar.png" alt="banner" /> */}
                 </div>
                 <div className="px-3 mt-15">
-                    <Info/>
+                    <Info />
 
                 </div>
                 <Divider my='xl' />
-                    <About />
+                <About />
                 <Divider my='xl' />
-                    <Skills />
+                <Skills />
                 <Divider my='xl' />
-                    <Experience /> 
+                <Experience />
                 <Divider my='xl' />
-                    <Certificate />
+                <Certificate />
 
 
             </div>
