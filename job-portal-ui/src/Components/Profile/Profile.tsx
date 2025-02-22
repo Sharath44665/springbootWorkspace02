@@ -13,6 +13,7 @@ import { setProfile } from "../../Slices/ProfileSlice";
 import About from "./About";
 import Skills from "./Skills";
 import Experience from "./Experience";
+import Certificate from "./Certificate";
 
 const Profile = (props: any) => {
     const dispatch = useDispatch();
@@ -64,33 +65,7 @@ const Profile = (props: any) => {
                 <Divider my='xl' />
                     <Experience /> 
                 <Divider my='xl' />
-                <div>
-                    <div className="text-2xl font-semibold mb-3 flex justify-between ">
-                        Certifications
-                        <div>
-                            <ActionIcon size='lg' variant="subtle" onClick={() => setAddCerti(true)} >
-                                <IconPlus className="h-4/5 w-4/5" /> 
-                            </ActionIcon>
-                            <ActionIcon size='lg' variant="subtle" onClick={() => handleEdit(4)} >
-                                {
-                                    edit[4] ? <IconDeviceFloppy className="h-4/5 w-4/5" /> : <IconPencil className="h-4/5 w-4/5" />
-                                }
-                            </ActionIcon>
-                        </div>
-                    </div>
-                    <div className="flex flex-col gap-4">
-
-                        {
-                            profileUser?.certifications?.map(
-                                (certify: any, id: any) => <CertificationCard key={id} {...certify} edit={edit[4]} />
-                            )
-                        }
-                        {
-                           addCerti && <CertificationInput setEdit={setAddCerti} /> 
-                        }
-                    </div>
-
-                </div>
+                    <Certificate />
 
 
             </div>
