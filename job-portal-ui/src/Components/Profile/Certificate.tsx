@@ -32,7 +32,7 @@ const Certificate = () => {
 
                 {
                     profile?.certifications?.map(
-                        (certify: any, id: any) => <CertificationCard key={id} {...certify} edit={edit} />
+                        (certify: any, id: any) => <CertificationCard key={id} idx={id} {...certify} edit={edit} />
                     )
                 }
                 {
