@@ -145,6 +145,12 @@ api post jobs
 
 [post jobs](./img/apiPostJobs.png)
 
+at backend via postman you should get these
+
+> http://localhost:8080/jobs/get-all
+> 
+> http://localhost:8080/jobs/get/1
+
 
 
 
