@@ -1,11 +1,57 @@
-import { Button, TagsInput } from "@mantine/core";
-import { fields } from "../../Data/PostJob";
+import { Button, NumberInput, TagsInput, Textarea } from "@mantine/core";
+import { content, fields } from "../../Data/PostJob";
 import SelectInput from "./SelectInput";
 import '@mantine/tiptap/styles.css';
 import MyRichTextEditor from "./MyRichTextEditor";
+import { isNotEmpty, useForm } from "@mantine/form";
+import { postJob } from "../../services/JobService";
+import { errorNotification, successNotification } from "../../services/NotificationService";
+import { useNavigate } from "react-router";
 
 const PostJob = () => {
     const select = fields;
+    const navigate = useNavigate();
+    const form = useForm({
+        mode: 'controlled',
+        validateInputOnChange: true,
+        initialValues: {
+            jobTitle: '',
+            company: '',
+            experience: '',
+            jobType: '',
+            location: '',
+            packageOffered: '',
+            skillsRequired: [],
+            about: '',
+            description: content
+        },
+        validate: {
+            jobTitle: isNotEmpty('Title is required'),
+            company: isNotEmpty('company is required'),
+            experience: isNotEmpty('experience is required'),
+            jobType: isNotEmpty('jobType is required'),
+            location: isNotEmpty('location is required'), 
+            packageOffered: isNotEmpty('package is required'),
+            skillsRequired: isNotEmpty('skills is required'),
+            about: isNotEmpty('about is required'),
+            description: isNotEmpty('description is required'),
+        }
+    })
+
+    const handlePost= () => {
+        form.validate()
+
+        if (!form.isValid()) return;
+
+        postJob(form.getValues()).then((res) => {
+            successNotification("Success", "Job posted successfully");
+            navigate('/posted-jobs')
+            console.log(res)
+        }).catch((err) => {
+            console.log(err)
+            errorNotification("Something went wrong", err.response.data)
+        })
+    }
     return (
         <>
             <div className=" w-4/5 mx-auto">
@@ -14,27 +60,35 @@ const PostJob = () => {
                 <div className="flex flex-col gap-4">
 
                     <div className="flex gap-10 [&>*]:w-1/2 ">
-                        <SelectInput {...select[0]} />
-                        <SelectInput {...select[1]} />
+                        <SelectInput form={form} name="jobTitle" {...select[0]} />
+                        <SelectInput form={form} name="company" {...select[1]} />
                     </div>
 
                     <div className="flex gap-10 [&>*]:w-1/2 ">
-                        <SelectInput {...select[2]} />
-                        <SelectInput {...select[3]} />
+                        <SelectInput form={form} name="experience" {...select[2]} />
+                        <SelectInput form={form} name="jobType" {...select[3]} />
                     </div>
 
                     <div className="flex gap-10 [&>*]:w-1/2 ">
-                        <SelectInput {...select[4]} />
-                        <SelectInput {...select[5]} />
+                        <SelectInput form={form} name="location" {...select[4]} />
+                        <NumberInput {...form.getInputProps('packageOffered')} label="Salary (In LPA)" placeholder="Enter Salary " clampBehavior="strict" hideControls withAsterisk min={1} max={300} />
                     </div>
-                    <TagsInput withAsterisk label="Skills" placeholder="Enter skills" clearable acceptValueOnBlur splitChars={[',', ' ', '|']} />
+                    <TagsInput {...form.getInputProps('skillsRequired')} withAsterisk label="Skills" placeholder="Enter skills" clearable acceptValueOnBlur splitChars={[',', ' ', '|']} />
+                    <Textarea
+                        {...form.getInputProps('about')}
+                        label="About Job"
+                        autosize
+                        minRows={3}
+                        withAsterisk
+                        placeholder="Enter About job"
+                    />
                     <div>
-                        <div className="text-sm font-medium">Job Description</div>
-                        <MyRichTextEditor />
+                        <div className="text-sm font-medium">Job Description <span className="text-red-500">*</span> </div>
+                        <MyRichTextEditor form={form} />
                     </div>
                     <div className="flex gap-4">
-                    <Button  variant="light" >Publish Job</Button>
-                    <Button variant="outline" >Save as Draft</Button>
+                        <Button variant="light" onClick={handlePost} >Publish Job</Button>
+                        <Button variant="outline" >Save as Draft</Button>
                     </div>
                 </div>
             </div>
