@@ -1,12 +1,13 @@
 import { ActionIcon, Button, Divider } from "@mantine/core";
 import { IconBookmark } from "@tabler/icons-react";
 import { Link } from "react-router";
-import { card, desc, skills } from "../../Data/JobDescData";
+import { card  } from "../../Data/JobDescData";
 //@ts-ignore
 import DOMPurify from 'dompurify';
+import { timeAgo } from "../../services/Utilities";
 
 const JobDesc = (props:any) => {
-    const data = DOMPurify.sanitize(desc);;
+    const data = DOMPurify.sanitize(props.description); 
     return (
         <>
             <div className="w-2/3">
@@ -14,18 +15,18 @@ const JobDesc = (props:any) => {
                     <div className="flex gap-2 items-center capitalize ">
                         <div className="p-3">
 
-                            <img className="h-14" src={`/Icons/Google.png`} alt="microsoft" />
+                            <img className="h-14" src={`/Icons/${props.company}.png`} alt="microsoft" />
 
                         </div>
                         <div>
 
-                            <div className="text-2xl">Software Engineer III</div>
-                            <div className="text-lg">Google &middot; 3 days ago  &middot; 22 applicants</div>
+                            <div className="text-2xl">{props.jobTitle}</div>
+                            <div className="text-lg">{props.company} &middot; {timeAgo(props.postTime)}  &middot; {props.applicants?props.applicants.length : 0} applicants</div>
 
                         </div>
                     </div>
                     <div className="flex flex-col gap-2 items-center">
-                        <Link to='/apply-job'>
+                        <Link to={`/apply-job/${props.id}`}>
                             <Button variant="filled" size="sm" >{props.edit?'Edit': 'Apply'}</Button>
                         </Link>
                         {props.edit?<Button variant="outline" color="red">Delete</Button>:<IconBookmark className="cursor-pointer" />}
@@ -40,7 +41,7 @@ const JobDesc = (props:any) => {
                                 <mycard.icon style={{ width: '70%', height: '70%' }} stroke={1.5} />
                             </ActionIcon>
                             <div>{mycard.name}</div>
-                            <div>{mycard.value}</div>
+                            <div>{props?props[mycard.id]:"NA"} {mycard.id == "packageOffered" && <>LPA</>}</div>
                         </div>)
                     }
 
@@ -50,7 +51,7 @@ const JobDesc = (props:any) => {
                     <div className="text-xl font-semibold mb-3">Requirede Skills</div>
                     <div className="flex flex-wrap gap-2 mb-3">
                         {
-                            skills.map((jobSkill: any, idx: any) => <ActionIcon key={idx} className="!h-fit !w-fit [&_span]:!text-sm" p='xs' size='sm' variant="filled" radius="xl" aria-label="Settings">
+                            props?.skillsRequired?.map((jobSkill: any, idx: any) => <ActionIcon key={idx} className="!h-fit !w-fit [&_span]:!text-sm" p='xs' size='sm' variant="filled" radius="xl" aria-label="Settings">
                                 {jobSkill}
                             </ActionIcon>)
                         }
@@ -68,18 +69,18 @@ const JobDesc = (props:any) => {
                         <div className="flex gap-2 items-center capitalize ">
                             <div className="p-3">
 
-                                <img className="h-8" src={`/Icons/Google.png`} alt="microsoft" />
+                                <img className="h-8" src={`/Icons/${props.company}.png`} alt="microsoft" />
 
                             </div>
                             <div>
 
-                                <div className="text-lg font-medium">Google</div>
+                                <div className="text-lg font-medium">{props.company}</div>
                                 <div className="">10K+ Employees</div>
 
                             </div>
                         </div>
                         <div className="flex flex-col gap-2 items-center">
-                            <Link to='/company'>
+                            <Link to={`/company/${props.company}`}>
                                 <Button variant="filled " size="sm" >Company Page</Button>
                             </Link>
 

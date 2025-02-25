@@ -1,8 +1,17 @@
-import { jobList } from "../../Data/JobsData";
+import { useEffect, useState } from "react"; 
 import JobCard from "./JobCard";
 import Sort from "./Sort";
+import { getAllJobs } from "../../services/JobService";
 
 const Jobs = () => {
+    const [jobList, setJobList] = useState([{}]);
+    useEffect(()=> {
+        getAllJobs().then((res)=> {
+            setJobList(res)
+        }).catch((err) => {
+            console.log(err)
+        })
+    },[])
     return (
         <>
             <div className="px-3">

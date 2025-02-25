@@ -1,10 +1,24 @@
 import { Button } from "@mantine/core";
 import { IconArrowNarrowLeft } from "@tabler/icons-react";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import JobDesc from "../Components/JobDesc/JobDesc";
 import RecommendedJobs from "../Components/JobDesc/RecommendedJobs";
+import { useEffect, useState } from "react";
+import { getJob } from "../services/JobService";
 
 const JobDescPage = () => {
+    const {id}= useParams();
+    const [job, setJob] = useState<any>(null)
+    // console.log(`type: ${id}`)
+    useEffect(()=>{
+        window.scrollTo(0, 0);
+        getJob(id).then((res) => {
+            setJob(res)
+            
+        }).catch((err)=>{
+            console.log(err)
+        })
+    },[id])
     return (
         <>
             <div className="px-5 pt-5">
@@ -16,7 +30,7 @@ const JobDescPage = () => {
 
             <div className="flex px-5 pt-5">
                
-                <JobDesc/>
+                <JobDesc {...job} />
                 <RecommendedJobs />
             </div>
         </>

@@ -11,12 +11,12 @@ import { setProfile } from '../../Slices/ProfileSlice';
 const Header = () => {
     const dispatch = useDispatch(); 
     const user = useSelector((state: any) => state.user)
-     
-
+    
     useEffect(() => {
+        if (!user) return; // added by me
         // console.log("profile user:")
         // console.log(profileUser)
-
+        // from below changed user.id to user
         getProfile(user.id).then((data: any) => {
             dispatch(setProfile(data));
             // console.log(data)
