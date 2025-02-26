@@ -8,6 +8,7 @@ import { timeAgo } from "../../services/Utilities";
 
 const JobDesc = (props:any) => {
     const data = DOMPurify.sanitize(props.description); 
+    // console.log(props)
     return (
         <>
             <div className="w-2/3">

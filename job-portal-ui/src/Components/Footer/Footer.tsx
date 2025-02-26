@@ -15,9 +15,9 @@ const Footer = () => {
                     <div className="text-sm">
                         descriptin Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus numquam animi hic modi saepe laboriosam, inventore voluptate soluta asperiores recusandae nisi expedita ad?
                     </div>
-                    <div className="flex [&>div]:bg-blue-200 [&>div]:p-2 [&>div]:rounded-full [&>div]:cursor-pointer gap-2">
-                        <div><IconBrandMeta stroke={2} /></div>
-                        <div><IconBrandX stroke={2} /></div>
+                    <div className="flex [&>div]:text-black [&>div]:bg-blue-200 [&>div]:p-2 [&>div]:rounded-full [&>div]:cursor-pointer gap-2">
+                        <div><IconBrandMeta /></div>
+                        <div><IconBrandX /></div>
                         <div><IconBrandLinkedin /> </div>
                     </div>
 
