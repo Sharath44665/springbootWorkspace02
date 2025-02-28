@@ -24,6 +24,7 @@ public class ProfileServiceImpl implements ProfileService{
         profile.setSkills(new ArrayList<>());
         profile.setExperiences(new ArrayList<>());
         profile.setCertifications(new ArrayList<>());
+        profile.setSavedJobs(new ArrayList<>());
         profileRepository.save(profile);
         return profile.getId();
     }

@@ -13,8 +13,7 @@ const ApplicationForm = () => {
     const {id} = useParams();
     const user = useSelector((state:any)=>state.user)
     const [preview, setPreview] = useState(false)
-    const [submit, setSubmit] = useState(false)
-    const [sec, setSec] = useState(5)
+    const [submit, setSubmit] = useState(false)  
     // const navigate = useNavigate();
     const handlePreview = () => {
         form.validate()
@@ -36,7 +35,7 @@ const ApplicationForm = () => {
             navigate("/jhistory")
         }).catch((err) => {
             setSubmit(false)
-            errorNotification("Error", err.response.data.errorMessage)
+            errorNotification("Error", err.response.data.errorMessage);
         })
     }
     const form = useForm({

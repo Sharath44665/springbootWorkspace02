@@ -1,13 +1,44 @@
 import { ActionIcon, Button, Divider } from "@mantine/core";
-import { IconBookmark } from "@tabler/icons-react";
+import { IconBookmark, IconBookmarkFilled } from "@tabler/icons-react";
 import { Link } from "react-router";
-import { card  } from "../../Data/JobDescData";
+import { card } from "../../Data/JobDescData";
 //@ts-ignore
 import DOMPurify from 'dompurify';
 import { timeAgo } from "../../services/Utilities";
+import { useDispatch, useSelector } from "react-redux";
+import { changeProfile } from "../../Slices/ProfileSlice";
+import { useEffect, useState } from "react";
 
-const JobDesc = (props:any) => {
-    const data = DOMPurify.sanitize(props.description); 
+const JobDesc = (props: any) => {
+    const dispatch = useDispatch();
+    const [applied, setApplied] = useState(false)
+    const profile = useSelector((state: any) => state.profile)
+    const user = useSelector((state:any) => state.user)
+
+    const handleSaveJob = () => {
+        let savedJobs: any = [...profile.savedJobs];
+        if (savedJobs?.includes(props.id)) {
+            savedJobs = savedJobs?.filter((id: any) => id !== props.id)
+        }
+        else {
+            savedJobs = [...savedJobs, props.id]
+        }
+
+        let updatedProfile = { ...profile, savedJobs: savedJobs }
+        dispatch(changeProfile(updatedProfile))
+    }
+
+    useEffect(()=>{
+        if(props.applicants?.filter((applicant:any)=> applicant.applicantId == user.id).length > 0){
+            setApplied(true)
+        }
+        else{
+            setApplied(false)
+        }
+    }, [props])
+
+    const data = DOMPurify.sanitize(props.description);
+
     // console.log(props)
     return (
         <>
@@ -16,22 +47,30 @@ const JobDesc = (props:any) => {
                     <div className="flex gap-2 items-center capitalize ">
                         <div className="p-3">
 
-                            <img className="h-14" src={`/Icons/${props.company}.png`} alt="microsoft" />
+                            <img className="h-14" src={`/Icons/${props.company}.png`} alt={props.company} />
 
                         </div>
                         <div>
 
                             <div className="text-2xl">{props.jobTitle}</div>
-                            <div className="text-lg">{props.company} &middot; {timeAgo(props.postTime)}  &middot; {props.applicants?props.applicants.length : 0} applicants</div>
+                            <div className="text-lg">{props.company} &middot; {timeAgo(props.postTime)}  &middot; {props.applicants ? props.applicants.length : 0} applicants</div>
 
                         </div>
                     </div>
                     <div className="flex flex-col gap-2 items-center">
-                        <Link to={`/apply-job/${props.id}`}>
-                            <Button variant="filled" size="sm" >{props.edit?'Edit': 'Apply'}</Button>
-                        </Link>
-                        {props.edit?<Button variant="outline" color="red">Delete</Button>:<IconBookmark className="cursor-pointer" />}
-                        
+                        {
+                            (props.edit || !applied) && <Link to={`/apply-job/${props.id}`}>
+                                <Button variant="filled" size="sm" >{props.edit ? 'Edit' : 'Apply'}</Button>
+                            </Link>
+
+                        }
+                        {
+                            applied && <Button variant="filled" color="green" size="sm" >Applied</Button>
+                        }
+                        {
+                            props.edit ? <Button variant="outline" color="red">Delete</Button> : profile.savedJobs?.includes(props.id) ? <IconBookmarkFilled onClick={handleSaveJob} className="cursor-pointer" /> : <IconBookmark onClick={handleSaveJob} className="cursor-pointer" />
+                        }
+
                     </div>
                 </div>
 
@@ -42,7 +81,7 @@ const JobDesc = (props:any) => {
                                 <mycard.icon style={{ width: '70%', height: '70%' }} stroke={1.5} />
                             </ActionIcon>
                             <div>{mycard.name}</div>
-                            <div>{props?props[mycard.id]:"NA"} {mycard.id == "packageOffered" && <>LPA</>}</div>
+                            <div>{props ? props[mycard.id] : "NA"} {mycard.id == "packageOffered" && <>LPA</>}</div>
                         </div>)
                     }
 

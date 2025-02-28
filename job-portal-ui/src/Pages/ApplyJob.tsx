@@ -9,17 +9,15 @@ const ApplyJob = () => {
     const navigate = useNavigate();
     const {id}= useParams();
     const [job, setJob] = useState<any>(null)
-    // console.log(`type: ${id}`)
-    useEffect(()=>{
-        window.scrollTo(0, 0);
-        getJob(id).then((res) => {
+
+    useEffect(() => {
+        window.scrollTo(0,0)
+        getJob(id).then((res) =>{
             setJob(res)
-            
-        }).catch((err)=>{
+        } ).catch((err) => {
             console.log(err)
         })
-    },[id])
-
+    }, [id])
     return (
         <>
             <div className="px-5 pt-5"> 

@@ -13,16 +13,18 @@ const Header = () => {
     const user = useSelector((state: any) => state.user)
     
     useEffect(() => {
-        if (!user) return; // added by me
-        // console.log("profile user:")
-        // console.log(profileUser)
-        // from below changed user.id to user
-        getProfile(user.id).then((data: any) => {
-            dispatch(setProfile(data));
-            // console.log(data)
-        }).catch((error) => {
-            console.log(error)
-        });
+        // if (!user) return; // added by me
+        if (user === null ){ 
+        }
+        else{
+            getProfile(user.profileId).then((data: any) => {
+                dispatch(setProfile(data));
+                // console.log(data)
+            }).catch((error) => {
+                console.log(error)
+            }); 
+        }
+
     }, [])
     const location = useLocation()
     return location.pathname != '/signup' && location.pathname != '/login' ? (
