@@ -151,6 +151,15 @@ at backend via postman you should get these
 > 
 > http://localhost:8080/jobs/get/1
 
+---
+when post-job added in UI, it should be updated as below.
 
+> please note that other dbs dont have this kind of data
+
+![add database jobstatus](./img/jobStatusAddDB.png)
+
+when post-job drafted, it should look like this
+
+![draft post job](./img/postJobDraft.png)
 
 

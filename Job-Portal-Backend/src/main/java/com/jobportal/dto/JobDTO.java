@@ -25,8 +25,9 @@ public class JobDTO {
     private String description;
     private List<String> skillsRequired;
     private JobStatus jobStatus;
+    private Long postedBy;
 
     public Job toEntity(){
-        return  new Job(this.id, this.jobTitle, this.company, this.applicants!=null?this.applicants.stream().map((x)->x.toEntity()).toList():null, this.about, this.experience, this.jobType, this.location, this.packageOffered, this.postTime, this.description, this.skillsRequired, this.jobStatus);
+        return  new Job(this.id, this.jobTitle, this.company, this.applicants!=null?this.applicants.stream().map((x)->x.toEntity()).toList():null, this.about, this.experience, this.jobType, this.location, this.packageOffered, this.postTime, this.description, this.skillsRequired, this.jobStatus, this.postedBy);
     }
 }

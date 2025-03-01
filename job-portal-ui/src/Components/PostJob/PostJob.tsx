@@ -7,8 +7,10 @@ import { isNotEmpty, useForm } from "@mantine/form";
 import { postJob } from "../../services/JobService";
 import { errorNotification, successNotification } from "../../services/NotificationService";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 
 const PostJob = () => {
+    const profile = useSelector((state: any) => state.profile)
     const select = fields;
     const navigate = useNavigate();
     const form = useForm({
@@ -30,7 +32,7 @@ const PostJob = () => {
             company: isNotEmpty('company is required'),
             experience: isNotEmpty('experience is required'),
             jobType: isNotEmpty('jobType is required'),
-            location: isNotEmpty('location is required'), 
+            location: isNotEmpty('location is required'),
             packageOffered: isNotEmpty('package is required'),
             skillsRequired: isNotEmpty('skills is required'),
             about: isNotEmpty('about is required'),
@@ -38,15 +40,25 @@ const PostJob = () => {
         }
     })
 
-    const handlePost= () => {
+    const handlePost = () => {
         form.validate()
 
         if (!form.isValid()) return;
 
-        postJob(form.getValues()).then((res) => {
+        postJob({ ...form.getValues(), postedBy: profile.id, jobStatus: 'ACTIVE' }).then((res) => {
             successNotification("Success", "Job posted successfully");
-            navigate('/posted-jobs')
-            console.log(res)
+            navigate(`/posted-jobs/${res.id}`)
+            // console.log(res)
+        }).catch((err) => {
+            console.log(err)
+            errorNotification("Something went wrong", err.response.data)
+        })
+    }
+    const handleDraft = () => {
+        postJob({ ...form.getValues(), postedBy: profile.id, jobStatus: 'DRAFT' }).then((res) => {
+            successNotification("Success", "Job Drafted successfully");
+            navigate(`/posted-jobs/${res.id}`)
+            // console.log(res)
         }).catch((err) => {
             console.log(err)
             errorNotification("Something went wrong", err.response.data)
@@ -88,7 +100,7 @@ const PostJob = () => {
                     </div>
                     <div className="flex gap-4">
                         <Button variant="light" onClick={handlePost} >Publish Job</Button>
-                        <Button variant="outline" >Save as Draft</Button>
+                        <Button variant="outline" onClick={handleDraft} >Save as Draft</Button>
                     </div>
                 </div>
             </div>
