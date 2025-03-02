@@ -43,13 +43,13 @@ public class JobAPI {
         return new ResponseEntity<>(new ResponseDTO("applied successfully"), HttpStatus.OK);
     }
 
-                            @GetMapping("/posted-by/{id}")
+    @GetMapping("/posted-by/{id}")
     public ResponseEntity<List<JobDTO>> getJobPostedBy(@PathVariable Long id) throws JobPortalException {
         return new ResponseEntity<>(jobService.getJobsPostedBy(id), HttpStatus.OK);
 
     }
 
-            @PostMapping("/change-app-status")
+    @PostMapping("/change-app-status")
     public ResponseEntity<ResponseDTO> changeAppStatus(  @RequestBody Application application) throws JobPortalException {
         jobService.changeAppStatus(application);
         return new ResponseEntity<>(new ResponseDTO("Application status changed successfully"), HttpStatus.OK);

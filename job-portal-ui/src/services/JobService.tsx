@@ -27,13 +27,13 @@ const applyJob = async(id:any, applicant:any) => {
 }
 
 const getJobPostedBy = async(id:any) => {
-    return axios.post(`${base_url}/posted-by/${id}`)
+    return axios.get(`${base_url}posted-by/${id}`)
         .then(result => result.data)
         .catch(error => {throw error;})
 }
 
-const changeAppStatus = async(application   :any) => {
-    return axios.post(`${base_url}/change-app-status`, application)
+const changeAppStatus = async(application:any) => {
+    return axios.post(`${base_url}change-app-status`, application)
         .then(result => result.data)
         .catch(error => {throw error;})
 }

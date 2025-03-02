@@ -10,7 +10,7 @@ import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 
 const PostJob = () => {
-    const profile = useSelector((state: any) => state.profile)
+    const user = useSelector((state: any) => state.user)
     const select = fields;
     const navigate = useNavigate();
     const form = useForm({
@@ -45,7 +45,7 @@ const PostJob = () => {
 
         if (!form.isValid()) return;
 
-        postJob({ ...form.getValues(), postedBy: profile.id, jobStatus: 'ACTIVE' }).then((res) => {
+        postJob({ ...form.getValues(), postedBy: user.id, jobStatus: 'ACTIVE' }).then((res) => {
             successNotification("Success", "Job posted successfully");
             navigate(`/posted-jobs/${res.id}`)
             // console.log(res)
@@ -55,7 +55,7 @@ const PostJob = () => {
         })
     }
     const handleDraft = () => {
-        postJob({ ...form.getValues(), postedBy: profile.id, jobStatus: 'DRAFT' }).then((res) => {
+        postJob({ ...form.getValues(), postedBy: user.id, jobStatus: 'DRAFT' }).then((res) => {
             successNotification("Success", "Job Drafted successfully");
             navigate(`/posted-jobs/${res.id}`)
             // console.log(res)
