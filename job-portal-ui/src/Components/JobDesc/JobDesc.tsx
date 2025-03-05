@@ -65,7 +65,7 @@ const JobDesc = (props: any) => {
 
                         }
                         {
-                            applied && <Button variant="filled" color="green" size="sm" >Applied</Button>
+                           !props.edit  && applied && <Button variant="filled" color="green" size="sm" >Applied</Button>
                         }
                         {
                             props.edit ? <Button variant="outline" color="red">Delete</Button> : profile.savedJobs?.includes(props.id) ? <IconBookmarkFilled onClick={handleSaveJob} className="cursor-pointer" /> : <IconBookmark onClick={handleSaveJob} className="cursor-pointer" />

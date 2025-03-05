@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import PostedJobDesc from "../Components/PostedJobs/PostedJobDesc";
 import PostedJobs from "../Components/PostedJobs/PostedJobs";
 import { useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import { getJobPostedBy } from "../services/JobService";
 
 
 const PostedJobsPage = () => {
+    const navigate = useNavigate()
     const {id} = useParams();
     const user = useSelector((state: any) => state.user)
     const [jobList, setJobList] = useState<any[]>([])
@@ -16,6 +17,8 @@ const PostedJobsPage = () => {
         window.scrollTo(0,0)
         getJobPostedBy(user.id).then((res)=>{
             setJobList(res)
+            // console.log(res)   
+            if (res && res.length > 0 && Number(id) == 0) navigate(`/posted-jobs/${res[0].id}`)             
             setJob(res.find((item:any)=> item.id==id))
            
         }).catch((err) => {

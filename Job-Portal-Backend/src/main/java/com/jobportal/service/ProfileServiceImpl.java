@@ -17,7 +17,7 @@ public class ProfileServiceImpl implements ProfileService{
     private ProfileRepository profileRepository;
 
     @Override
-    public Long createProfile(String email) throws JobPortalException {
+    public Long createProfile(String email, String name) throws JobPortalException {
         Profile profile = new Profile();
         profile.setId(Utilities.getNextSequence("profiles"));
         profile.setEmail(email);
@@ -25,6 +25,8 @@ public class ProfileServiceImpl implements ProfileService{
         profile.setExperiences(new ArrayList<>());
         profile.setCertifications(new ArrayList<>());
         profile.setSavedJobs(new ArrayList<>());
+//        profile.setPicture(new Byte());
+        profile.setName(name);
         profileRepository.save(profile);
         return profile.getId();
     }
@@ -40,4 +42,13 @@ public class ProfileServiceImpl implements ProfileService{
         profileRepository.save(profileDto.toEntity());
         return profileDto;
     }
+
+    @Override
+    public List<ProfileDto> getAllProfile() {
+        return profileRepository.findAll().stream().map((x)-> x.toDto()).toList();
+    }
+
+
+
+
 }

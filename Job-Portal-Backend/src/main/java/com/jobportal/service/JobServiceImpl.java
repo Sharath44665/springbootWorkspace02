@@ -64,6 +64,8 @@ public class JobServiceImpl implements JobService{
 
         List<Applicant> applicants = job.getApplicants().stream().map((x) -> {
             if(application.getApplicantId() == x.getApplicantId()){
+//                System.out.println("status: "+application.getApplicationStatus());
+//                System.out.println(application.toString());
                 x.setApplicationStatus(application.getApplicationStatus());
                 if(application.getApplicationStatus().equals(ApplicationStatus.INTERVIEWING))
                     x.setInterviewTime(application.getInterviewTime());

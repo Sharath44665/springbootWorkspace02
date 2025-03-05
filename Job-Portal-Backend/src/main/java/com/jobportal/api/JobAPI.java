@@ -49,8 +49,9 @@ public class JobAPI {
 
     }
 
-    @PostMapping("/change-app-status")
+        @PostMapping("/change-app-status")
     public ResponseEntity<ResponseDTO> changeAppStatus(  @RequestBody Application application) throws JobPortalException {
+//        System.out.println("application status"+application.toString());
         jobService.changeAppStatus(application);
         return new ResponseEntity<>(new ResponseDTO("Application status changed successfully"), HttpStatus.OK);
     }
