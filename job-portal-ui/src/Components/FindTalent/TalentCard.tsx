@@ -82,7 +82,7 @@ const TalentCard = (props: any) => {
                     {
                         props.invited ? <div className="flex gap-1 text-sm items-center">
                             <IconCalendarMonth /> Interview: {formatInterviewTime(props.interviewTime)}
-                        </div> : <><div>22 LPA</div>
+                        </div> : <><div>Exp: {props.totalExp?props.totalExp:1} {props.totalExp>1?"Years":"Year"}  </div>
                             <div className="flex text-gray-400 items-center"><IconMapPin className="h-10" />  {profile.location}</div></>
                     }
 
@@ -129,7 +129,7 @@ const TalentCard = (props: any) => {
                     </div>
                 </Modal>
 
-                <Modal opened={app} onClose={close} title="Application" centered>
+                <Modal opened={app} onClose={closeApp} title="Application" centered>
                     <div className="flex flex-col gap-4">
                         <div>
                             Email: &emsp; <a className="hover:underline cursor-pointer text-center" href={`mailto:${props.email}`}>{props.email} </a>

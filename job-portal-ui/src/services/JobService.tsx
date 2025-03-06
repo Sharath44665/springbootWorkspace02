@@ -4,7 +4,9 @@ const base_url = "http://localhost:8080/jobs/"
 
 const postJob = async (job:any) => { 
     return axios.post(`${base_url}post`, job)
-            .then(res => res.data)
+            .then(res => {
+                // console.log(res.data)
+                return res.data})
             .catch(error => {throw error});
 }
 

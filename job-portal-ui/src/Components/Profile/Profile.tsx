@@ -32,7 +32,7 @@ const Profile = () => {
                 <div className="relative">
                     <img className="rounded-t-xl" src="/Profile/banner.jpg" alt="banner" />
                     <div ref={ref} className="absolute flex items-center justify-center top-1/3 left-3" >
-                        <Avatar className="!w-48 !h-48 border-black border-8" src={profile.picture?`data:image/jpeg;base64,${profile.picture}`: "/avatar.png"} alt="profile img" />
+                        <Avatar className="!w-48 !h-48 border-black border-8" src={profile.picture?`data:image/jpeg;base64,${profile.picture}`: null} color="blue" alt="profile img" />
                         {
                             hovered && (
                                 <Overlay

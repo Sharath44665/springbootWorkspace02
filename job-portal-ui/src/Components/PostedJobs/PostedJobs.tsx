@@ -20,6 +20,7 @@ const PostedJobs = (props: any) => {
                         <Tabs.List className="[&_button]:!text-lg">
                             <Tabs.Tab value="ACTIVE">Active [{props.jobList?.filter((job:any)=>job?.jobStatus == "ACTIVE").length}]</Tabs.Tab>
                             <Tabs.Tab value="DRAFT">Draft ({props.jobList?.filter((job:any)=>job?.jobStatus == "DRAFT").length}) </Tabs.Tab>
+                            <Tabs.Tab value="CLOSED">Closed ({props.jobList?.filter((job:any)=>job?.jobStatus == "CLOSED").length}) </Tabs.Tab>
                         </Tabs.List>
 
                         {/* <Tabs.Panel value="ACTIVE">

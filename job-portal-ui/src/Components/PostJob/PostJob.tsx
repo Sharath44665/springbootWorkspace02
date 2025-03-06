@@ -4,15 +4,35 @@ import SelectInput from "./SelectInput";
 import '@mantine/tiptap/styles.css';
 import MyRichTextEditor from "./MyRichTextEditor";
 import { isNotEmpty, useForm } from "@mantine/form";
-import { postJob } from "../../services/JobService";
+import { getJob, postJob } from "../../services/JobService";
 import { errorNotification, successNotification } from "../../services/NotificationService";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 const PostJob = () => {
+    const {id} = useParams();
+    const [editorData, setEditorData] = useState(content)
     const user = useSelector((state: any) => state.user)
     const select = fields;
     const navigate = useNavigate();
+
+    useEffect(()=> {
+        window.scrollTo(0,0)
+        if (id !== "0"){
+            getJob(id).then((res) => {
+                form.setValues(res)
+                setEditorData(res.description)
+            }).catch((err) => {
+                console.log(err)
+            })
+        }
+        else {
+            form.reset()   
+            setEditorData(content)
+        } 
+    },[id])
+
     const form = useForm({
         mode: 'controlled',
         validateInputOnChange: true,
@@ -45,7 +65,7 @@ const PostJob = () => {
 
         if (!form.isValid()) return;
 
-        postJob({ ...form.getValues(), postedBy: user.id, jobStatus: 'ACTIVE' }).then((res) => {
+        postJob({ ...form.getValues(), id, postedBy: user.id, jobStatus: 'ACTIVE' }).then((res) => {
             successNotification("Success", "Job posted successfully");
             navigate(`/posted-jobs/${res.id}`)
             // console.log(res)
@@ -55,7 +75,7 @@ const PostJob = () => {
         })
     }
     const handleDraft = () => {
-        postJob({ ...form.getValues(), postedBy: user.id, jobStatus: 'DRAFT' }).then((res) => {
+        postJob({ ...form.getValues(), id, postedBy: user.id, jobStatus: 'DRAFT' }).then((res) => {
             successNotification("Success", "Job Drafted successfully");
             navigate(`/posted-jobs/${res.id}`)
             // console.log(res)
@@ -96,7 +116,7 @@ const PostJob = () => {
                     />
                     <div>
                         <div className="text-sm font-medium">Job Description <span className="text-red-500">*</span> </div>
-                        <MyRichTextEditor form={form} />
+                        <MyRichTextEditor form={form} data={editorData} />
                     </div>
                     <div className="flex gap-4">
                         <Button variant="light" onClick={handlePost} >Publish Job</Button>

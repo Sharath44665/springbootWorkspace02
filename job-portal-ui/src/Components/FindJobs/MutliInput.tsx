@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Checkbox, Combobox, Group, Pill, PillsInput, useCombobox } from '@mantine/core';
+import { useDispatch } from 'react-redux';
+import { updateFilter } from '../../Slices/FilterSlice';
 // import { IconSearch, IconMapPin, IconBriefcase, IconRecharging } from '@tabler/icons-react';
 
 
 const MultiInput = (props: any) => {
-  useEffect(()=>{
+  const dispatch = useDispatch();
+
+  useEffect(() => {
     setData(props.options)
-  },[])
+  }, [])
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
     onDropdownOpen: () => combobox.updateSelectedOptionIndex('active'),
@@ -25,15 +29,20 @@ const MultiInput = (props: any) => {
     if (val === '$create') {
       setData((current) => [...current, search]);
       setValue((current) => [...current, search]);
+      dispatch(updateFilter({ [props.title]: [...value, search] }))
     } else {
+      dispatch(updateFilter({ [props.title]: value.includes(val) ? value.filter((v) => v !== val) : [...value, val] }))
       setValue((current) =>
         current.includes(val) ? current.filter((v) => v !== val) : [...current, val]
       );
     }
   };
 
-  const handleValueRemove = (val: string) =>
+  const handleValueRemove = (val: string) => {
+    dispatch(updateFilter({ [props.title]: value.filter((v) => v !== val) }))
     setValue((current) => current.filter((v) => v !== val));
+
+  }
 
   // const values = value.map((item) => (
   //   <Pill key={item} withRemoveButton onRemove={() => handleValueRemove(item)}>
@@ -71,7 +80,7 @@ const MultiInput = (props: any) => {
         </Group>
       </Combobox.Option>
     ));
-    // console.log(props.icons)
+  // console.log(props.icons)
   return (
     <Combobox store={combobox} onOptionSubmit={handleValueSelect} withinPortal={false} >
       <Combobox.DropdownTarget>

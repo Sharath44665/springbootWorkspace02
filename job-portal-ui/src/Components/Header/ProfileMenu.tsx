@@ -21,7 +21,7 @@ const ProfileMenu = () => {
             <Menu.Target>
 
                 <div className='flex items-center cursor-pointer'>
-                    <Avatar src={profile.picture?`data:image/jpeg;base64,${profile.picture}`: "/avatar.png"} alt="it's me" />
+                    <Avatar src={profile.picture?`data:image/jpeg;base64,${profile.picture}`: null} color='blue' alt="it's me" />
                     <div>{user.name}</div>
                 </div>
 

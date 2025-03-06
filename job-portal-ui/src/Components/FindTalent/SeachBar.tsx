@@ -3,9 +3,22 @@ import { searchFields } from "../../Data/TalentData";
 import { useState } from "react";
 import MultiInput from "../FindJobs/MutliInput";
 import { IconUser } from "@tabler/icons-react";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { updateFilter } from "../../Slices/FilterSlice";
 
 const SearchBar = () => {
-    const [value, setValue] = useState([1, 10])
+    const dispatch = useDispatch();
+    const [value, setValue] = useState<[number, number]> ([1, 50])
+    const [name, setName] = useState('');
+    const handleChange =(name:any, event:any) =>{
+        if (name == "exp")
+            dispatch(updateFilter({exp:event}))
+        else {
+            setName(event.target.value)
+            dispatch(updateFilter({name:event.target.value}))
+        }
+    }
     return (
         <>
             <Divider my="xs" label="Find Talent:" labelPosition="left" />
@@ -13,19 +26,19 @@ const SearchBar = () => {
 
                 <div className="flex items-center w-1/5 ">
                     <IconUser className="p-1" />
-                    <Input variant="unstyled" className="w-full" placeholder="Talent Name" />
+                    <Input variant="unstyled" defaultValue={name} onChange={(e)=>handleChange("name",e)} className="w-full" placeholder="Talent Name" />
                 </div>
 
                 <Divider orientation="vertical" />
                 {
                     searchFields.map((dropdownItem, idx) => {
                         return (
-                            <>
+                            <React.Fragment key={idx}>
                                 <div key={idx} className="w-1/5" >
                                     <MultiInput key={idx} {...dropdownItem} />
                                 </div>
                                 <Divider orientation="vertical" />
-                            </>
+                            </React.Fragment    >
 
                         )
                     })
@@ -33,11 +46,11 @@ const SearchBar = () => {
 
                 <div className="w-1/5 ">
                     <div className="flex justify-between">
-                        <div>Salary</div>
-                        <div>&#8377;{value[0]} LPA - &#8377;{value[1]} LPA</div>
+                        <div>Experience</div>
+                        <div> {value[0]} Years - {value[1]} Years</div>
                     </div>
 
-                    <RangeSlider minRange={1} min={1} max={100} step={1} defaultValue={[1, 10]} onChange={setValue} />
+                    <RangeSlider onChangeEnd={(e)=>handleChange("exp",e)} minRange={1} min={0} max={50} step={1} defaultValue={[2, 10]} onChange={setValue} />
 
                 </div>
 

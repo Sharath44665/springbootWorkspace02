@@ -8,7 +8,7 @@ const SelectInput = (props: any) => {
     setData(props.options)
     setValue(props.form.getInputProps(props.name).value )
     setSearch(props.form.getInputProps(props.name).value )
-  }, [])
+  }, [props])
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
