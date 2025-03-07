@@ -70,7 +70,7 @@ const Info = (props: any) => {
                 <SelectInput form={form} name="location" {...select[2]} />
             </> : <>
                 <div className="flex text-xl gap-1 items-center ">
-                    <IconBriefcase /> {profile.jobTitle} &middot; {profile.company}
+                    <IconBriefcase /> {profile.jobTitle} &middot; {profile.totalExp}Year(s) of Experience &middot; {profile.company}
                 </div>
                 <div className="flex text-gray-400 gap-1 items-center text-lg"><IconCurrentLocation /> {profile.location}</div>
             </>

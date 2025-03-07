@@ -161,7 +161,10 @@ when post-job added in UI, it should be updated as below.
 when post-job drafted, it should look like this
 
 ![draft post job](./img/postJobDraft.png) 
+--- 
+ experience added in the backend
 ---
 TODO: need to add sequence screenshot
 
-
+            
+    

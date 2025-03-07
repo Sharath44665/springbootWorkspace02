@@ -14,10 +14,10 @@ const Header = () => {
     
     useEffect(() => {
         // if (!user) return; // added by me
-        if (user === null ){ 
+        if (user === null ){  
         }
         else{
-            getProfile(user.profileId).then((data: any) => {
+            getProfile(user.profileId).then((data: any) => { 
                 dispatch(setProfile(data));
                 // console.log(data)
             }).catch((error) => {

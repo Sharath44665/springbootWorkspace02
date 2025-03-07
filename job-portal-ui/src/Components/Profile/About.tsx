@@ -13,7 +13,7 @@ const About = () => {
     const handleEdit = () => {
         if (!edit) {
             setEdit(true)
-            setAbout(profile.about)
+            setAbout(profile?.about)
         }
         else {
             setEdit(false)
