@@ -38,9 +38,7 @@ const Talents = () => {
             filterTalent = filterTalent.filter((talent:any)=> filter.exp[0] <= talent.totalExp && talent.totalExp <= filter.exp[1]);
         }
         setFilteredTalent(filterTalent);
-        console.log(filter)
-
-
+        
 
     }, [filter, talents])
     return (

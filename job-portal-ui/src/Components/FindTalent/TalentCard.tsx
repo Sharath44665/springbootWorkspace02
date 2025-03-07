@@ -59,7 +59,7 @@ const TalentCard = (props: any) => {
                             <Avatar size='lg' src={profile?.picture ? `data:image/jpeg;base64,${profile?.picture}` : "/avatar.png"} alt="microsoft" />
                         </div>
                         <div>
-                            <div className="text-lg font-semibold">{props.name}</div>
+                            <div className="text-lg font-semibold">{props.name} </div>
                             <div>{profile?.jobTitle} &middot; {profile?.company}</div>
                         </div>
                     </div>

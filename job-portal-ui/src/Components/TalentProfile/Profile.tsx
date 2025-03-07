@@ -26,7 +26,7 @@ const Profile = (props: any) => {
                 </div>
                 <div className="px-3 mt-15">
                     <div className="text-3xl font-semibold flex justify-between">{profile?.name}<Button variant="filled" >Message</Button></div>
-                    <div className="flex text-xl gap-1 items-center "> <IconBriefcase /> {profile?.jobTitle} &middot; {profile?.company}</div>
+                    <div className="flex text-xl gap-1 items-center capitalize "> <IconBriefcase /> {profile?.jobTitle} &middot; {profile?.totalExp} year(s) of experience &middot; {profile?.company}</div>
                     <div className="flex text-gray-400 gap-1 items-center text-lg"><IconCurrentLocation /> {profile?.location}</div>
                 </div>
                 <Divider my='xl' />
