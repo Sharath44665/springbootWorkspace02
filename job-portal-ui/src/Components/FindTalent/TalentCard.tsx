@@ -56,7 +56,7 @@ const TalentCard = (props: any) => {
                 <div className="flex bg-blue-300 text-black justify-between">
                     <div className="flex gap-2 items-center capitalize ">
                         <div className="p-1">
-                            <Avatar size='lg' src={profile?.picture ? `data:image/jpeg;base64,${profile?.picture}` : "/avatar.png"} alt="microsoft" />
+                            <Avatar size='lg' src={profile?.picture ? `data:image/jpeg;base64,${profile?.picture}` : null} alt="microsoft" />
                         </div>
                         <div>
                             <div className="text-lg font-semibold">{props.name}</div>

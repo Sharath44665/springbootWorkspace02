@@ -11,9 +11,11 @@ const profileSlice = createSlice({
         },
 
         setProfile: (state, action) => {
-            state = action.payload;
-            return state;
+            // state = action.payload;
+            // return state;
+            return { ...state, ...action.payload };
         }
+        
 
     }
 })

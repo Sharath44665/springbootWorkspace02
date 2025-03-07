@@ -22,7 +22,7 @@ const Profile = (props: any) => {
             <div className="w-2/3">
                 <div className="relative">
                     <img className="rounded-t-xl" src="/Profile/banner.jpg" alt="banner" />
-                    <img className="rounded-full w-48 h-48 absolute top-1/3 left-3 border-black border-8" src={profile.picture?`data:image/jpeg;base64,${profile.picture}`: "/avatar.png"} alt="" />
+                    <img className="rounded-full w-48 h-48 absolute top-1/3 left-3 border-black border-8" src={profile.picture?`data:image/jpeg;base64,${profile.picture}`: "/user.jpg"} alt="" />
                 </div>
                 <div className="px-3 mt-15">
                     <div className="text-3xl font-semibold flex justify-between">{profile?.name}<Button variant="filled" >Message</Button></div>

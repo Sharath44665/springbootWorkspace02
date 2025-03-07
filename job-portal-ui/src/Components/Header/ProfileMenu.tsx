@@ -6,15 +6,20 @@ import {
     IconLogout2,
 } from '@tabler/icons-react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { removeUser } from '../../Slices/UserSlice';
 
 const ProfileMenu = () => {
+    const fullUrl = window.location.href; 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const profile = useSelector((state: any)=> state.profile)
     const user = useSelector((state:any) => state.user)
     const handleLogout = () => {
         dispatch(removeUser());
+        if (fullUrl === "http://localhost:5173/profile"){
+            navigate("/");
+        }
     }
     return (
         <Menu shadow="md" width={200}>
