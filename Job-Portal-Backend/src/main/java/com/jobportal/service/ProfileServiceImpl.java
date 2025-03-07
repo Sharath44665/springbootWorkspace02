@@ -48,7 +48,4 @@ public class ProfileServiceImpl implements ProfileService{
         return profileRepository.findAll().stream().map((x)-> x.toDto()).toList();
     }
 
-
-
-
 }
