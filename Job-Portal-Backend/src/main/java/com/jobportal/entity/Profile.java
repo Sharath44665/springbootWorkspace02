@@ -33,7 +33,6 @@ public class Profile {
     private List<Long> savedJobs;
 
     public ProfileDto toDto(){
-//        experiences.stream().forEach(System.out::println);
         return new ProfileDto(this.id, this.name, this.email, this.jobTitle, this.company, this.location, this.about, this.picture!=null? Base64.getEncoder().encodeToString(this.picture):null, this.totalExp, this.skills,  this.experiences, this.certifications, this.savedJobs);
     }
 }
