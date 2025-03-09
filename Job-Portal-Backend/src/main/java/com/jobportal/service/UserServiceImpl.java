@@ -1,11 +1,13 @@
 package com.jobportal.service;
 
 import com.jobportal.dto.LoginDTO;
+import com.jobportal.dto.NotificationDto;
 import com.jobportal.dto.ResponseDTO;
 import com.jobportal.dto.UserDTO;
 import com.jobportal.entity.OTP;
 import com.jobportal.entity.User;
 import com.jobportal.exceptions.JobPortalException;
+import com.jobportal.repository.NotificationRepository;
 import com.jobportal.repository.OTPRepository;
 import com.jobportal.repository.UserRepository;
 import com.jobportal.utility.Data;
@@ -40,9 +42,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private JavaMailSender mailSender;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @Override
     public UserDTO registerUser(UserDTO userDTO) throws JobPortalException {
-        Optional<User> optional = userRepository.findByEmail(userDTO.getEmail());
+        Optional<User> optional = userRepository.findByEmail(userDTO.getEmail().trim());
         if(optional.isPresent()) throw new JobPortalException("USER_FOUND");
         userDTO.setProfileId(profileService.createProfile(userDTO.getEmail(), userDTO.getName()));
         userDTO.setId(Utilities.getNextSequence("users"));
@@ -54,7 +59,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO loginUser(LoginDTO loginDTO) throws JobPortalException {
-        User user = userRepository.findByEmail(loginDTO.getEmail()).orElseThrow(()-> new JobPortalException("USER_NOT_FOUND"));
+        User user = userRepository.findByEmail(loginDTO.getEmail().trim()).orElseThrow(()-> new JobPortalException("USER_NOT_FOUND"));
         if (!passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) throw new JobPortalException("INVALID_CREDENTIALS");
         return user.toDTO();
 
@@ -88,6 +93,11 @@ public class UserServiceImpl implements UserService {
         User user= userRepository.findByEmail(loginDTO.getEmail()).orElseThrow(()-> new JobPortalException("USER_NOT_FOUND"));
         user.setPassword(passwordEncoder.encode(loginDTO.getPassword()));
         userRepository.save(user);
+        NotificationDto notificationDto = new NotificationDto();
+        notificationDto.setUserId(user.getId());
+        notificationDto.setMessage("Password Reset Successful");
+        notificationDto.setAction("Password Reset");
+        notificationService.sendNotification(notificationDto);
         return new ResponseDTO("Password changed successfully");
     }
 

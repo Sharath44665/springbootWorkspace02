@@ -73,7 +73,7 @@ public class ProfileServiceImpl implements ProfileService{
     }
 
     public Long calculateTotalExp(ProfileDto profileDto){
-        profileDto.getExperiences().stream().forEach(System.out::println);
+//        profileDto.getExperiences().stream().forEach(System.out::println);
         List<Long> months = profileDto.getExperiences().stream().map(experience -> ChronoUnit.MONTHS.between(experience.getStartDate(), experience.getEndDate())).collect(Collectors.toList());
         Long sum = months.stream().mapToLong(Long::longValue).sum();
         double expYear = Math.round(sum/12);

@@ -24,7 +24,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const handleChange = (event: any) => {
-        setFormError({ ...formError, [event.target.name]: "" })
+        setFormError({ ...formError, [event.target.name]: "" }) 
         setData({ ...data, [event.target.name]: event.target.value })
     }
 

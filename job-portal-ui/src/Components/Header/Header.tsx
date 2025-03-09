@@ -1,13 +1,14 @@
 import { Button, Indicator } from '@mantine/core';
 import { IconAsset, IconBell, IconSettings } from '@tabler/icons-react';
 import NavLinks from './NavLinks';
-import { Link, useLocation, useNavigate } from 'react-router';
+import { Link, useLocation} from 'react-router';
 import DarkMode from './DarkMode';
 import ProfileMenu from './ProfileMenu';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getProfile } from '../../services/ProfileService';
 import { setProfile } from '../../Slices/ProfileSlice';
+import NotificationMenu from './NotificationMenu';
 const Header = () => {
     const dispatch = useDispatch();
     const user = useSelector((state: any) => state.user)
@@ -52,13 +53,7 @@ const Header = () => {
                 </div>
                 <NavLinks />
                 <div className='flex gap-2 items-center'>
-                    <DarkMode />
-                    <div className='bg-stone-700 p-1 rounded-full'>
-                        <Indicator color="indigo" size={7} offset={6} processing>
-                            <IconBell stroke={2} />
-                        </Indicator>
-                    </div>
-
+                    <DarkMode /> 
                     {
                         user ? <ProfileMenu /> : <Link to="/login">
                             <Button variant='subtle'>Login</Button>
@@ -68,7 +63,9 @@ const Header = () => {
 
                         <IconSettings stroke={2} />
                     </div>
-
+                    {
+                        user?<NotificationMenu/> :<></>
+                    }
                 </div>
 
             </div>

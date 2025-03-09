@@ -25,7 +25,7 @@ const Profile = () => {
         successNotification("success", "Profile picture updated successfully")
 
     } 
-    console.log(profile)
+    // console.log(profile)
     return (
         <>
             <div className="w-4/5 mx-auto">

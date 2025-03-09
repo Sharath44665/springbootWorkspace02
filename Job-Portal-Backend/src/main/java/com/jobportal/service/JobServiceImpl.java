@@ -18,13 +18,27 @@ public class JobServiceImpl implements JobService{
     @Autowired
     private JobRepository jobRepository;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @Override
     public JobDTO postJob(JobDTO jobDTO) throws JobPortalException {
 
         if(jobDTO.getId() == 0){
             jobDTO.setId(Utilities.getNextSequence("jobs"));
             jobDTO.setPostTime(LocalDateTime.now());
-        }
+            NotificationDto notificationDto = new NotificationDto();
+            notificationDto.setAction("Job Posted");
+            notificationDto.setMessage("Job posted successfully for "+jobDTO.getJobTitle());
+            notificationDto.setUserId(jobDTO.getPostedBy()  );
+            notificationDto.setRoute("/posted-jobs/"+jobDTO.getId());
+
+            try {
+                notificationService.sendNotification(notificationDto);
+
+        } catch (JobPortalException e) {
+                throw new RuntimeException(e);
+            }}
         else{
             Job job = jobRepository.findById(jobDTO.getId()).orElseThrow(()-> new JobPortalException("JOB_NOT_FOUND"));
             if(job.getJobStatus().equals(JobStatus.DRAFT) || jobDTO.getJobStatus().equals(JobStatus.CLOSED) )
@@ -72,8 +86,21 @@ public class JobServiceImpl implements JobService{
 //                System.out.println("status: "+application.getApplicationStatus());
 //                System.out.println(application.toString());
                 x.setApplicationStatus(application.getApplicationStatus());
-                if(application.getApplicationStatus().equals(ApplicationStatus.INTERVIEWING))
+                if(application.getApplicationStatus().equals(ApplicationStatus.INTERVIEWING)) {
                     x.setInterviewTime(application.getInterviewTime());
+                    NotificationDto notificationDto = new NotificationDto();
+                    notificationDto.setAction("Interview Scheduled");
+                    notificationDto.setMessage("Interview Scheduled for job id: "+application.getApplicantId());
+                    notificationDto.setUserId(application.getApplicantId());
+                    notificationDto.setRoute("/jhistory");
+
+                    try {
+                        notificationService.sendNotification(notificationDto);
+                    } catch (JobPortalException e) {
+                                throw new RuntimeException(e);
+                    }
+                }
+
             }
             return  x;
         }).toList();
