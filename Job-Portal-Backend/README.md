@@ -164,7 +164,32 @@ when post-job drafted, it should look like this
 --- 
  experience added in the backend
 ---
+
+jwt
+
+after code implementation, you should get this:
+
+![jwt get](./img/jwt_get.png)
+
+auth login error:
+
+![authlogin error](./img/auth_login.png)
+
+auth login success:
+
+![auth login success](./img/auth_login_success.png)
+
+user registered already:
+
+![auth user registered already](./img/user_register_already.png)
+
+new user register:
+
+![new user register](./img/newUserRegister.png)
+
 TODO: need to add sequence screenshot
+
+
 
             
     
