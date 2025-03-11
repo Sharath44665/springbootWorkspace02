@@ -38,3 +38,13 @@ npm run dev
 **Please Note:**
 
 > I have not implemented JWT because, its outdated and its creating me too much bugs
+
+Demo screenshot:
+
+Light mode:
+
+![lighmode](./img/Screenshot_20250311_134256.png)
+
+dark mode:
+
+![darkmode](./img/darkScreenshot_20250311_134404.png)
