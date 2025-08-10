@@ -1,5 +1,11 @@
 # How to use it
 
+> Please Note:
+> 
+> The following folders contain the backend and frontend projects, respectively:
+> - Job-Portal-Backend 
+> - job-portal-ui 
+
 ```
 cd job-portal-ui
 
